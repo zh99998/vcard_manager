@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_edu_sdust_vcard_manager_Info" modelAttribute="info" path="/infoes" versionField="Version" z="OHj4iIiP6sOagtVPMh9+QUy6CgQ=">
+        <field:input field="property" id="c_edu_sdust_vcard_manager_Info_property" z="40HUUMLOETDJU8OM9M3jlEGeyhE="/>
+        <field:input field="type" id="c_edu_sdust_vcard_manager_Info_type" z="TufpyNqpcVmbDXOf/S9Ss/epqWg="/>
+        <field:input field="value" id="c_edu_sdust_vcard_manager_Info_value" z="Cc1WcxwUv7PxrhPlTFoLoyt9YFg="/>
+        <field:select field="card" id="c_edu_sdust_vcard_manager_Info_card" itemValue="id" items="${cards}" path="/cards" z="W07Tsg6EmnR40qsh55gAyHKONdw="/>
+    </form:update>
+</div>

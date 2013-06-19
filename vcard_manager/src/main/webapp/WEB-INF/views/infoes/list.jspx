@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_edu_sdust_vcard_manager_Info" items="${infoes}" z="z257buCPhRVfcF3vJn/N7FRl654=">
+        <table:table data="${infoes}" id="l_edu_sdust_vcard_manager_Info" path="/infoes" z="QkXyQEFySVz1ofY+Q6BxwKdU9yg=">
+            <table:column id="c_edu_sdust_vcard_manager_Info_property" property="property" z="rYmqL0KeKTEvelcXGJ5lRcmFp7o="/>
+            <table:column id="c_edu_sdust_vcard_manager_Info_type" property="type" z="kDa+MVUts6xzRuF5HeLr94EDB+k="/>
+            <table:column id="c_edu_sdust_vcard_manager_Info_value" property="value" z="ZbIo6uv+fepUWOdjoOM3rNo53QA="/>
+            <table:column id="c_edu_sdust_vcard_manager_Info_card" property="card" z="evplLqSJgb5Mlhg+GPvblQnEUEI="/>
+        </table:table>
+    </page:list>
+</div>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_edu_sdust_vcard_manager_Card" items="${cards}" z="pIpXPpuIFIT/yUkNGkxtOgVxO4o=">
+        <table:table data="${cards}" id="l_edu_sdust_vcard_manager_Card" path="/cards" z="P/Gdu0HQZ1kZS5AJ6iOvnUJfxjI=">
+            <table:column id="c_edu_sdust_vcard_manager_Card_isMe" property="isMe" z="7LQ5mDby/kqL78KkXrdr0V/EsCs="/>
+            <table:column id="c_edu_sdust_vcard_manager_Card_deleted" property="deleted" z="Ca1m1MNU00XqAC/JL3XdP9xY//o="/>
+            <table:column id="c_edu_sdust_vcard_manager_Card_imgFront" property="imgFront" z="IVXkQApj46lIF+zSNWVo0wxMmdE="/>
+            <table:column id="c_edu_sdust_vcard_manager_Card_imgBack" property="imgBack" z="4o8ugWMJ+Yy2dNFgo8mp4BLnsyM="/>
+            <table:column date="true" dateTimePattern="${card_createdat_date_format}" id="c_edu_sdust_vcard_manager_Card_createdAt" property="createdAt" z="prG5MLdofk+ixNKVUw8TisopkZA="/>
+            <table:column date="true" dateTimePattern="${card_updatedat_date_format}" id="c_edu_sdust_vcard_manager_Card_updatedAt" property="updatedAt" z="V9NxYGFy3MVZG1HSuozdjvEs8B4="/>
+        </table:table>
+    </page:list>
+</div>
