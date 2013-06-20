@@ -76,14 +76,14 @@ body {
 				</div>
 
 				<div class="btn-group">
-					<a href="#myModal" class="btn dropdown-toggle" style="width:65px;"
+					<a href="#new_circle" class="btn dropdown-toggle" style="width:65px;"
 						data-toggle="modal"> <i class="icon-user"> <!-- --></i><i
 						class="icon-plus"> <!--  --></i><span style="margin:3px 10px;"></span>
 						<span class="caret"></span>
 					</a>
 
 					<!-- Modal -->
-					<div id="myModal" class="modal hide fade" tabindex="-1"
+					<div id="new_circle" class="modal hide fade" tabindex="-1"
 						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
@@ -91,7 +91,7 @@ body {
 							<h3 id="myModalLabel">Modal header</h3>
 						</div>
 						<div class="modal-body">
-							<input type="text" style="width:525px;height:55px;" />
+							<input type="text" style="width:525px;height:55px;"></input>
 						</div>
 						<div class="modal-footer">
 							<button class="btn" data-dismiss="modal" aria-hidden="true">
