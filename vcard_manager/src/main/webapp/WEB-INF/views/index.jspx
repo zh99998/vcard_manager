@@ -34,22 +34,23 @@ body {
 						<li><a href="#">群组1</a></li>
 						<li><a href="#">群组2</a></li>
 						<!-- Button to trigger modal -->
-						<li><a href="#myModal" role="button" class="btn"
+						<li><a href="#new_circle" role="button" class="btn"
 							data-toggle="modal" style="width:80px">新建群组</a></li>
 						<li><a href="#myModal" role="button" class="btn"
 							data-toggle="modal" style="width:80px">导入名片</a></li>
 						<!-- Modal -->
-						<div id="myModal" class="modal hide fade" tabindex="-1"
+						<div id="new_circle" class="modal hide fade" tabindex="-1"
 							role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">×</button>
 								<h3 id="myModalLabel">Modal header</h3>
 							</div>
-							<div class="modal-body"></div>
-							<p>
-								输入组名<input type="text" name="fname" />
-							</p>
+							<div class="modal-body">
+								<p>
+									输入组名 <input type="text" name="fname" />
+								</p>
+							</div>
 							<div class="modal-footer">
 								<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 								<button class="btn btn-primary">保存</button>
@@ -76,14 +77,14 @@ body {
 				</div>
 
 				<div class="btn-group">
-					<a href="#new_circle" class="btn dropdown-toggle" style="width:65px;"
+					<a href="#new_card" class="btn dropdown-toggle" style="width:65px;"
 						data-toggle="modal"> <i class="icon-user"> <!-- --></i><i
 						class="icon-plus"> <!--  --></i><span style="margin:3px 10px;"></span>
 						<span class="caret"></span>
 					</a>
 
 					<!-- Modal -->
-					<div id="new_circle" class="modal hide fade" tabindex="-1"
+					<div id="new_card" class="modal hide fade" tabindex="-1"
 						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
@@ -91,7 +92,7 @@ body {
 							<h3 id="myModalLabel">Modal header</h3>
 						</div>
 						<div class="modal-body">
-							<input type="text" style="width:525px;height:55px;"></input>
+							<input type="text" style="width:525px;height:55px;" />
 						</div>
 						<div class="modal-footer">
 							<button class="btn" data-dismiss="modal" aria-hidden="true">
