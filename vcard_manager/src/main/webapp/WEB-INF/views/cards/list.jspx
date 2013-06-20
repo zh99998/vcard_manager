@@ -1,15 +1,132 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_edu_sdust_vcard_manager_Card" items="${cards}" z="pIpXPpuIFIT/yUkNGkxtOgVxO4o=">
-        <table:table data="${cards}" id="l_edu_sdust_vcard_manager_Card" path="/cards" z="P/Gdu0HQZ1kZS5AJ6iOvnUJfxjI=">
-            <table:column id="c_edu_sdust_vcard_manager_Card_isMe" property="isMe" z="7LQ5mDby/kqL78KkXrdr0V/EsCs="/>
-            <table:column id="c_edu_sdust_vcard_manager_Card_deleted" property="deleted" z="Ca1m1MNU00XqAC/JL3XdP9xY//o="/>
-            <table:column id="c_edu_sdust_vcard_manager_Card_imgFront" property="imgFront" z="IVXkQApj46lIF+zSNWVo0wxMmdE="/>
-            <table:column id="c_edu_sdust_vcard_manager_Card_imgBack" property="imgBack" z="4o8ugWMJ+Yy2dNFgo8mp4BLnsyM="/>
-            <table:column date="true" dateTimePattern="${card_createdat_date_format}" id="c_edu_sdust_vcard_manager_Card_createdAt" property="createdAt" z="prG5MLdofk+ixNKVUw8TisopkZA="/>
-            <table:column date="true" dateTimePattern="${card_updatedat_date_format}" id="c_edu_sdust_vcard_manager_Card_updatedAt" property="updatedAt" z="V9NxYGFy3MVZG1HSuozdjvEs8B4="/>
-        </table:table>
-    </page:list>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+	<style>
+body {
+	margin: 0px;
+	padding: 0px;
+	font-size: 14px;
+	overflow: hidden;
+}
+
+#main {
+	width: 90%;
+	margin-top: 10px;
+	margin-left: 2px;
+}
+</style>
+	<div class="btn-group">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"  style="width:65px;">
+				<input type="checkbox" style="margin:3px 10px;" />
+				<span class="caret"></span> </a>
+				<ul class="dropdown-menu">
+					<li>
+						<a tabindex="-1" href="#">全选</a>
+					</li>
+					<li>
+						<a tabindex="-1" href="#">全不选</a>
+					</li>
+					<li class="divider"></li>
+				</ul>
+			</div>
+
+			<div class="btn-group">
+				<a href="#myModal" class="btn dropdown-toggle" style="width:65px;" data-toggle="modal"> <i class="icon-user"><!-- --></i><i class="icon-plus"><!--  --></i><span style="margin:3px 10px;"></span> <span class="caret"></span> </a>
+
+				<!-- Modal -->
+				<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							×
+						</button>
+						<h3 id="myModalLabel">Modal header</h3>
+					</div>
+					<div class="modal-body">
+						<input type="text" style="width:525px;height:55px;" />
+					</div>
+					<div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">
+							关闭
+						</button>
+						<button class="btn btn-primary">
+							保存
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="btn-group">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"  style="width:65px;"> <span style="margin:3px 10px;">更多</span> <span class="caret"></span> </a>
+				<ul class="dropdown-menu">
+					<li>
+						<a tabindex="-1" href="#">删除联系人</a>
+					</li>
+					<li>
+						<a tabindex="-1" href="#">合并联系人</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a tabindex="-1" href="#">导入...</a>
+					</li>
+					<li>
+						<a tabindex="-1" href="#">导出...</a>
+					</li>
+					<li>
+						<a tabindex="-1" href="#">查找并合并重复项</a>
+					</li>
+					<li>
+						<a tabindex="-1" href="#">还原通讯录</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a tabindex="-1" href="#">名字</a>
+					</li>
+					<li>
+						<a tabindex="-1" href="#">姓氏</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="btn-group" style="float:right;">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"  style="width:20px;height:20px;"> <i class="icon-chevron-left"><!--  --></i> </a>
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"  style="width:25px;height:20px;"> <i class="icon-chevron-right"><!--  --></i> </a>
+			</div>
+			
+			<div class="btn-group" style="float:right;">
+				<div>
+					<b>zhang</b>
+					"-"
+					<b>test</b>
+				</div>
+			</div>
+
+
+
+
+
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<page:list id="pl_edu_sdust_vcard_manager_Card" items="${cards}"
+		z="pIpXPpuIFIT/yUkNGkxtOgVxO4o=">
+		<table:table data="${cards}" id="l_edu_sdust_vcard_manager_Card"
+			path="/cards" z="P/Gdu0HQZ1kZS5AJ6iOvnUJfxjI=">
+			<table:column id="c_edu_sdust_vcard_manager_Card_isMe"
+				property="isMe" z="7LQ5mDby/kqL78KkXrdr0V/EsCs=" />
+			<table:column id="c_edu_sdust_vcard_manager_Card_deleted"
+				property="deleted" z="Ca1m1MNU00XqAC/JL3XdP9xY//o=" />
+			<table:column id="c_edu_sdust_vcard_manager_Card_imgFront"
+				property="imgFront" z="IVXkQApj46lIF+zSNWVo0wxMmdE=" />
+			<table:column id="c_edu_sdust_vcard_manager_Card_imgBack"
+				property="imgBack" z="4o8ugWMJ+Yy2dNFgo8mp4BLnsyM=" />
+			<table:column date="true"
+				dateTimePattern="${card_createdat_date_format}"
+				id="c_edu_sdust_vcard_manager_Card_createdAt" property="createdAt"
+				z="prG5MLdofk+ixNKVUw8TisopkZA=" />
+			<table:column date="true"
+				dateTimePattern="${card_updatedat_date_format}"
+				id="c_edu_sdust_vcard_manager_Card_updatedAt" property="updatedAt"
+				z="V9NxYGFy3MVZG1HSuozdjvEs8B4=" />
+		</table:table>
+	</page:list>
 </div>

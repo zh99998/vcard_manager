@@ -15,13 +15,12 @@
   
   <spring:url value="/resources/scripts/bootstrap.min.js" var="bootstrap_url" />
   <spring:url value="/resources/scripts/jquery.min.js" var="jquery_url" />
+
   
-  <!--<link rel="stylesheet" type="text/css" href="${tundra_url}" />-->
-  <!--<link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}" />-->
-  <script src="${jquery_url}"></script>
-  <script src="${bootstrap_url}"></script>
-  <link rel="${bootstrap_css_url}" type="text/css" href="${tundra_url}" />
-  <link rel="${bootstrap_responsive_css_url}" type="text/css" href="${tundra_url}" />
+  <script src="${jquery_url}" type="text/javascript"><!-- --></script>
+  <script src="${bootstrap_url}" type="text/javascript"><!-- --></script>
+  <link rel="stylesheet" type="text/css" href="${bootstrap_css_url}" />
+  <link rel="stylesheet" type="text/css" href="${bootstrap_responsive_css_url}" />
   
   
   <link rel="SHORTCUT ICON" href="${favicon}" />
