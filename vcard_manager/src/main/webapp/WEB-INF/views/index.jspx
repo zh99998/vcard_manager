@@ -8,7 +8,90 @@
       <spring:message code="welcome_h3" arguments="${app_name}" />
     </h3>
     <p>
-      <spring:message code="welcome_text" />
+      <div class="btn-group">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"  style="width:65px;">
+				<input type="checkbox" style="margin:3px 10px;" />
+				<span class="caret"></span> </a>
+				<ul class="dropdown-menu">
+					<li>
+						<a tabindex="-1" href="#">全选</a>
+					</li>
+					<li>
+						<a tabindex="-1" href="#">全不选</a>
+					</li>
+					<li class="divider"></li>
+				</ul>
+			</div>
+
+			<div class="btn-group">
+				<a href="#myModal" class="btn dropdown-toggle" style="width:65px;" data-toggle="modal"> <i class="icon-user"><!-- --></i><i class="icon-plus"><!--  --></i><span style="margin:3px 10px;"></span> <span class="caret"></span> </a>
+
+				<!-- Modal -->
+				<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							×
+						</button>
+						<h3 id="myModalLabel">Modal header</h3>
+					</div>
+					<div class="modal-body">
+						<input type="text" style="width:525px;height:55px;" />
+					</div>
+					<div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">
+							关闭
+						</button>
+						<button class="btn btn-primary">
+							保存
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="btn-group">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"  style="width:65px;"> <span style="margin:3px 10px;">更多</span> <span class="caret"></span> </a>
+				<ul class="dropdown-menu">
+					<li>
+						<a tabindex="-1" href="#">删除联系人</a>
+					</li>
+					<li>
+						<a tabindex="-1" href="#">合并联系人</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a tabindex="-1" href="#">导入...</a>
+					</li>
+					<li>
+						<a tabindex="-1" href="#">导出...</a>
+					</li>
+					<li>
+						<a tabindex="-1" href="#">查找并合并重复项</a>
+					</li>
+					<li>
+						<a tabindex="-1" href="#">还原通讯录</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a tabindex="-1" href="#">名字</a>
+					</li>
+					<li>
+						<a tabindex="-1" href="#">姓氏</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="btn-group" style="float:right;">
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"  style="width:20px;height:20px;"> <i class="icon-chevron-left"><!--  --></i> </a>
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"  style="width:25px;height:20px;"> <i class="icon-chevron-right"><!--  --></i> </a>
+			</div>
+			
+			<div class="btn-group" style="float:right;">
+				<div>
+					<b>zhang</b>
+					"-"
+					<b>test</b>
+				</div>
+			</div>
     </p>
   </util:panel>
 </div>
