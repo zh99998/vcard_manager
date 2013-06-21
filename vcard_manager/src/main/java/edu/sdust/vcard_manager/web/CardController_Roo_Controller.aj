@@ -56,6 +56,12 @@ privileged aspect CardController_Roo_Controller {
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
             uiModel.addAttribute("cards", Card.findAllCards());
+            for(Card card : Card.findAllCards()){
+            	List<Info> listInfoes = entityManager().createQuery("SELECT o FROM Info o where card="+card.getId(), Info.class).getResultList();
+            	Map<Card,List<Info>> cardInfoes = new Hash<Card,List<Info>>();
+            	cardInfoes.put(card,listInfoes);
+            	
+            }
         }
         addDateTimeFormatPatterns(uiModel);
         return "cards/list";
