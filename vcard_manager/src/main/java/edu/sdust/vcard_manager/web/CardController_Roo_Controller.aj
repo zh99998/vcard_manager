@@ -60,7 +60,7 @@ privileged aspect CardController_Roo_Controller {
             	List<Info> listInfoes = entityManager().createQuery("SELECT o FROM Info o where card="+card.getId(), Info.class).getResultList();
             	Map<Card,List<Info>> cardInfoes = new Hash<Card,List<Info>>();
             	cardInfoes.put(card,listInfoes);
-            	
+            	uiModel.addAttribute("cardInfoes",cardInfoes);
             }
         }
         addDateTimeFormatPatterns(uiModel);
