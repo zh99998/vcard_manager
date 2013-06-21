@@ -67,7 +67,7 @@ public final class default_jspx extends org.apache.jasper.runtime.HttpJspBase
       out.write("<html>");
       out.write("<head>");
       out.write("<meta content=\"text/html; charset=UTF-8\" http-equiv=\"Content-Type\"/>");
-      out.write("<meta content=\"IE=8\" http-equiv=\"X-UA-Compatible\"/>");
+      out.write("<meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\"/>");
       if (_jspx_meth_util_005fload_002dscripts_005f0(_jspx_page_context))
         return;
       if (_jspx_meth_spring_005fmessage_005f0(_jspx_page_context))

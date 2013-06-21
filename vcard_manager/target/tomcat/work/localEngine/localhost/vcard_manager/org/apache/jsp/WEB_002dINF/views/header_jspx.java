@@ -7,12 +7,6 @@ import javax.servlet.jsp.*;
 public final class header_jspx extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
-static private org.apache.jasper.runtime.ProtectedFunctionMapper _jspx_fnmap_0;
-
-static {
-  _jspx_fnmap_0= org.apache.jasper.runtime.ProtectedFunctionMapper.getMapForFunction("fn:escapeXml", org.apache.taglibs.standard.functions.Functions.class, "escapeXml", new Class[] {java.lang.String.class});
-}
-
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.List _jspx_dependants;
@@ -70,9 +64,64 @@ static {
         return;
       if (_jspx_meth_spring_005fmessage_005f0(_jspx_page_context))
         return;
-      out.write("<a title=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${fn:escapeXml(home_label)}", java.lang.String.class, (PageContext)_jspx_page_context, _jspx_fnmap_0, false) + "\" name=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${fn:escapeXml(home_label)}", java.lang.String.class, (PageContext)_jspx_page_context, _jspx_fnmap_0, false) + "\" href=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${home}", java.lang.String.class, (PageContext)_jspx_page_context, null, false) + "\">");
-      out.write("<img src=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${banner}", java.lang.String.class, (PageContext)_jspx_page_context, null, false) + "\"/>");
+      out.write("<div class=\"navbar navbar-inverse navbar-fixed-top\">");
+      out.write("<div class=\"navbar-inner\">");
+      out.write("<div class=\"container-fluid\">");
+      out.write("<button data-target=\".nav-collapse\" data-toggle=\"collapse\" class=\"btn btn-navbar\" type=\"button\">");
+      out.write("<span class=\"icon-bar\"/>");
+      out.write("<span class=\"icon-bar\"/>");
+      out.write("<span class=\"icon-bar\"/>");
+      out.write("</button>");
+      out.write("<a href=\"#\" class=\"brand\">");
+      out.write("名片管理系統");
       out.write("</a>");
+      out.write("<div class=\"nav-collapse collapse\">");
+      out.write("<p class=\"navbar-text pull-right\">");
+      out.write("\n");
+      out.write("\t\t\t\t\t\tLogged in as ");
+      out.write("<a class=\"navbar-link\" href=\"#\">");
+      out.write("Username");
+      out.write("</a>");
+      out.write("</p>");
+      out.write("<ul class=\"nav\">");
+      out.write("<li class=\"active\">");
+      out.write("<a href=\"#\">");
+      out.write('首');
+      out.write('页');
+      out.write("</a>");
+      out.write("</li>");
+      out.write("<li>");
+      out.write("<a data-toggle=\"modal\" href=\"#about\">");
+      out.write('关');
+      out.write('于');
+      out.write("</a>");
+      out.write("</li>");
+      out.write("</ul>");
+      out.write("</div>");
+      out.write("</div>");
+      out.write("</div>");
+      out.write("</div>");
+      out.write("<div aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" role=\"dialog\" tabindex=\"-1\" class=\"modal hide fade\" id=\"about\">");
+      out.write("<div class=\"modal-header\">");
+      out.write("<button aria-hidden=\"true\" data-dismiss=\"modal\" class=\"close\" type=\"button\">");
+      out.write('×');
+      out.write("</button>");
+      out.write("<h3 id=\"myModalLabel\">");
+      out.write("关于名片管理系统");
+      out.write("</h3>");
+      out.write("</div>");
+      out.write("<div class=\"modal-body\">");
+      out.write("<p>");
+      out.write("喵喵喵喵");
+      out.write("</p>");
+      out.write("</div>");
+      out.write("<div class=\"modal-footer\">");
+      out.write("<button aria-hidden=\"true\" data-dismiss=\"modal\" class=\"btn btn-primary\">");
+      out.write('确');
+      out.write('定');
+      out.write("</button>");
+      out.write("</div>");
+      out.write("</div>");
       out.write("</div>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
@@ -94,9 +143,9 @@ static {
     org.springframework.web.servlet.tags.UrlTag _jspx_th_spring_005furl_005f0 = (org.springframework.web.servlet.tags.UrlTag) _005fjspx_005ftagPool_005fspring_005furl_0026_005fvar_005fvalue_005fnobody.get(org.springframework.web.servlet.tags.UrlTag.class);
     _jspx_th_spring_005furl_005f0.setPageContext(_jspx_page_context);
     _jspx_th_spring_005furl_005f0.setParent(null);
-    // /WEB-INF/views/header.jspx(5,75) name = value type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/header.jspx(8,74) name = value type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_spring_005furl_005f0.setValue("/resources/images/banner-graphic.png");
-    // /WEB-INF/views/header.jspx(5,75) name = var type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/header.jspx(8,74) name = var type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_spring_005furl_005f0.setVar("banner");
     int[] _jspx_push_body_count_spring_005furl_005f0 = new int[] { 0 };
     try {
@@ -123,9 +172,9 @@ static {
     org.springframework.web.servlet.tags.UrlTag _jspx_th_spring_005furl_005f1 = (org.springframework.web.servlet.tags.UrlTag) _005fjspx_005ftagPool_005fspring_005furl_0026_005fvar_005fvalue_005fnobody.get(org.springframework.web.servlet.tags.UrlTag.class);
     _jspx_th_spring_005furl_005f1.setPageContext(_jspx_page_context);
     _jspx_th_spring_005furl_005f1.setParent(null);
-    // /WEB-INF/views/header.jspx(6,38) name = value type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/header.jspx(9,37) name = value type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_spring_005furl_005f1.setValue("/");
-    // /WEB-INF/views/header.jspx(6,38) name = var type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/header.jspx(9,37) name = var type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_spring_005furl_005f1.setVar("home");
     int[] _jspx_push_body_count_spring_005furl_005f1 = new int[] { 0 };
     try {
@@ -152,11 +201,11 @@ static {
     org.springframework.web.servlet.tags.MessageTag _jspx_th_spring_005fmessage_005f0 = (org.springframework.web.servlet.tags.MessageTag) _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fvar_005fhtmlEscape_005fcode_005fnobody.get(org.springframework.web.servlet.tags.MessageTag.class);
     _jspx_th_spring_005fmessage_005f0.setPageContext(_jspx_page_context);
     _jspx_th_spring_005fmessage_005f0.setParent(null);
-    // /WEB-INF/views/header.jspx(7,76) name = htmlEscape type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/header.jspx(10,75) name = htmlEscape type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_spring_005fmessage_005f0.setHtmlEscape("false");
-    // /WEB-INF/views/header.jspx(7,76) name = var type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/header.jspx(10,75) name = var type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_spring_005fmessage_005f0.setVar("home_label");
-    // /WEB-INF/views/header.jspx(7,76) name = code type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/header.jspx(10,75) name = code type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_spring_005fmessage_005f0.setCode("button_home");
     int[] _jspx_push_body_count_spring_005fmessage_005f0 = new int[] { 0 };
     try {
