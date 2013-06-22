@@ -20,9 +20,14 @@ public class CardDaoImpl {
 		ResultSet rs = null;
 		try {
 			conn = dataSource.getConnection();
-			String sql = "insert into Card(createdAt,updatedAt,deleted,isMe,imgBack,imgFront)values(?,?,?)";
+			String sql = "insert into Card(createdAt,updatedAt,deleted,isMe,imgBack,imgFront)values(?,?,?,?,?,?)";
 			ps = conn.prepareStatement(sql);
 			ps.setDate(1, new java.sql.Date(System.currentTimeMillis()));
+			ps.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+			ps.setBoolean(3, card.isDeleted());
+			ps.setBoolean(4, card.isMe());
+			ps.setBlob(5, card.getImgBack());
+			ps.setBlob(6, card.getImgFront());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new DaoException(e.getMessage(), e);

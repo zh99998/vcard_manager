@@ -4,14 +4,16 @@ import edu.sdkd.utils.Constant;
 
 import java.util.Date;
 
+import com.mysql.jdbc.Blob;
+
 public class Card {
 	private int id;
 	private Date createdAt;
 	private Date updatedAt;
 	private boolean deleted;
 	private boolean isMe;
-	private byte[] imgBack;
-	private byte[] imgFront;
+	private Blob imgBack;
+	private Blob imgFront;
 	
 	public int getId() {
 		return id;
@@ -43,16 +45,16 @@ public class Card {
 	public void setMe(boolean isMe) {
 		this.isMe = isMe;
 	}
-	public byte[] getImgBack() {
+	public Blob getImgBack() {
 		return imgBack;
 	}
-	public void setImgBack(byte[] imgBack) {
+	public void setImgBack(Blob imgBack) {
 		this.imgBack = imgBack;
 	}
-	public byte[] getImgFront() {
+	public Blob getImgFront() {
 		return imgFront;
 	}
-	public void setImgFront(byte[] imgFront) {
+	public void setImgFront(Blob imgFront) {
 		this.imgFront = imgFront;
 	}
 	
