@@ -6,12 +6,13 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 public class MyDataSource {
-	private static String url = "jdbc:mysql://127.0.0.1:3306/vcard_manager";
+	String driver = "com.mysql.jdbc.Driver";
+	private static String url = "jdbc:mysql://zhang-pc:3306/vcard_manager";
 	private static String user = "root";
 	private static String password = "root";
 	
 	private static int initCount = 5;
-	private static int maxCount = 10;
+	private static int maxCount = 100;
 	private int currentCount = 0;
 	LinkedList<Connection> connectionsPool = new LinkedList<Connection>();
 	
@@ -33,8 +34,7 @@ public class MyDataSource {
 			if(this.currentCount<this.maxCount){
 				this.currentCount++;
 				return this.createConnection();
-			}
-			
+			}	
 			throw new SQLException("已没有连接");
 		}
 	}
@@ -44,6 +44,11 @@ public class MyDataSource {
 	}
 	
 	private Connection createConnection() throws SQLException{
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		Connection realConn = DriverManager.getConnection(url, user, password);
 		MyConnectionHandler proxy = new MyConnectionHandler(this);
 		return proxy.bind(realConn);

@@ -23,7 +23,7 @@ public class CardDaoImpl implements CardDao{
 		ResultSet rs = null;
 		try {
 			conn = dataSource.getConnection();
-			String sql = "insert into Card(createdAt,updatedAt,deleted,isMe,imgBack,imgFront)values(?,?,?,?,?,?)";
+			String sql = "insert into card(createdAt,updatedAt,deleted,isMe,imgBack,imgFront)values(?,?,?,?,?,?);";
 			ps = conn.prepareStatement(sql);
 			ps.setDate(1, new java.sql.Date(System.currentTimeMillis()));
 			ps.setDate(2, new java.sql.Date(System.currentTimeMillis()));
@@ -46,7 +46,7 @@ public class CardDaoImpl implements CardDao{
 		ResultSet rs = null;
 		try {
 			conn = dataSource.getConnection();
-			String sql = "delete from card  where id=" + card.getId();
+			String sql = "delete from card  where id=" + card.getId()+";";
 			st = conn.createStatement();
 			st.executeUpdate(sql);
 		} catch (SQLException e){
@@ -63,7 +63,7 @@ public class CardDaoImpl implements CardDao{
 		ResultSet rs = null;
 		Card card = new Card();
 		try {
-			String sql = "select * from card  where id=?";
+			String sql = "select * from card  where id=?;";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
@@ -98,7 +98,7 @@ public class CardDaoImpl implements CardDao{
 		ResultSet rs = null;
 		try {
 			conn = dataSource.getConnection();
-			String sql = "update card  set deleted=?,img_back=?,img_front=?,is_me=? where id=?";
+			String sql = "update card  set deleted=?,img_back=?,img_front=?,is_me=? where id=?;";
 			ps = conn.prepareStatement(sql);
 			ps.setBoolean(1, card.isDeleted());
 			ps.setBlob(2, card.getImgBack());
@@ -119,8 +119,9 @@ public class CardDaoImpl implements CardDao{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
+			conn = dataSource.getConnection();
 			Card card = new Card();
-			String sql = "select * from card";
+			String sql = "select * from card;";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()){
