@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import edu.sdkd.dao.CardDao;
 import edu.sdkd.dao.DaoException;
 import edu.sdkd.datasource.MyDataSource;
 import edu.sdkd.domain.Card;
 
-public class CardDaoImpl {
+public class CardDaoImpl implements CardDao{
 	public void addCard(Card card) {
 		MyDataSource dataSource = new MyDataSource();
 		Connection conn = null;
