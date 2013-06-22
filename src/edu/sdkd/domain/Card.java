@@ -1,6 +1,7 @@
 package edu.sdkd.domain;
 
-import edu.sdkd.service.Constant;
+import edu.sdkd.utils.Constant;
+
 import java.util.Date;
 
 public class Card {
