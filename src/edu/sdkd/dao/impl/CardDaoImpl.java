@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import edu.sdkd.dao.DaoException;
@@ -21,7 +22,7 @@ public class CardDaoImpl {
 			conn = dataSource.getConnection();
 			String sql = "insert into Card(createdAt,updatedAt,deleted,isMe,imgBack,imgFront)values(?,?,?)";
 			ps = conn.prepareStatement(sql);
-			ps.setDate(1, new java.sql.Date(System));
+			ps.setDate(1, new java.sql.Date(System.currentTimeMillis()));
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new DaoException(e.getMessage(), e);
