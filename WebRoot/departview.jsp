@@ -177,8 +177,8 @@ body {
 						<li class="divider"></li>
 						<li><a tabindex="-1" href="#">导入...</a></li>
 						<li><a tabindex="-1" href="#">导出...</a></li>
+						<li><a tabindex="-1" href="#">查找并合并重复项</a></li>
 						<li><a tabindex="-1" href="departview.jsp">公司部门视图</a></li>
-						<li><a tabindex="-1" href="#">还原通讯录</a></li>
 						<li class="divider"></li>
 						<li><a tabindex="-1" href="#">名字</a></li>
 						<li><a tabindex="-1" href="#">姓氏</a></li>
@@ -203,9 +203,10 @@ body {
 					</div>
 				</div>
 			</div>
+			<div>
+			//公司部门视图
+			</div>
 		</div>
 	</div>
-  
-    This is my JSP page. <br>
   </body>
 </html>
