@@ -48,14 +48,14 @@ public class Card {
 	public Blob getImgBack() {
 		return imgBack;
 	}
-	public void setImgBack(Blob imgBack) {
-		this.imgBack = imgBack;
+	public void setImgBack(java.sql.Blob blob) {
+		this.imgBack = (Blob) blob;
 	}
 	public Blob getImgFront() {
 		return imgFront;
 	}
-	public void setImgFront(Blob imgFront) {
-		this.imgFront = imgFront;
+	public void setImgFront(java.sql.Blob blob) {
+		this.imgFront = (Blob) blob;
 	}
 	
 }
