@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import edu.sdkd.dao.DaoException;
 import edu.sdkd.datasource.MyDataSource;
@@ -35,4 +37,101 @@ public class CardDaoImpl {
 			dataSource.free(conn);
 		}
 	}
+	
+	public void delete(Card card) {
+		MyDataSource dataSource = new MyDataSource();
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "delete from card  where id=" + card.getId();
+			st = conn.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e){
+			throw new DaoException(e.getMessage(), e);
+		}finally {
+			dataSource.free(conn);
+		}
+	}
+
+	public Card getCard(int id) {
+		MyDataSource dataSource = new MyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Card card = new Card();
+		try {
+			String sql = "select * from card  where id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				card = mappingCard(rs);
+			}
+		} catch (SQLException e){
+			throw new DaoException(e.getMessage(), e);
+		}finally {
+			dataSource.free(conn);
+		}
+		return card;
+	}
+
+	private Card mappingCard(ResultSet rs) throws SQLException {
+		Card card = new Card();
+		card.setId(rs.getInt("id"));
+		card.setCreatedAt(rs.getDate("created_at"));
+		card.setUpdatedAt(rs.getDate("updated_at"));
+		card.setMe(rs.getBoolean("is_me"));
+		card.setDeleted(rs.getBoolean("deleted"));
+		card.setImgBack(rs.getBlob("img_back"));
+		card.setImgFront(rs.getBlob("img_front"));
+		return card;
+		
+	}
+
+	public void update(Card card) {
+		MyDataSource dataSource = new MyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "update card  set deleted=?,img_back=?,img_front=?,is_me=? where id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setBoolean(1, card.isDeleted());
+			ps.setBlob(2, card.getImgBack());
+			ps.setBlob(3, card.getImgFront());
+			ps.setBoolean(4, card.isMe());
+			rs = ps.executeQuery();
+		} catch (SQLException e){
+			throw new DaoException(e.getMessage(), e);
+		}finally {
+			dataSource.free(conn);
+		}
+	}
+	
+	public List<Card> list(){
+		MyDataSource dataSource = new MyDataSource();
+		List listCard = new ArrayList<Card>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			Card card = new Card();
+			String sql = "select * from card";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				card = mappingCard(rs);
+				listCard.add(card);
+			}
+		} catch (SQLException e){
+			throw new DaoException(e.getMessage(), e);
+		}finally {
+			dataSource.free(conn);
+		}
+		return listCard;
+	}
+	
 }
