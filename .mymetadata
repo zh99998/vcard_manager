@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="vcard_manager"
+  id="myeclipse.1371518454383"
+  context-root="/vcard_manager"
+  j2ee-spec="5.0"
+  archive="vcard_manager.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
