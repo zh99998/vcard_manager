@@ -61,10 +61,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<h3 id="myModalLabel">关于名片管理系统</h3>
 		</div>
 		<div class="modal-body">
-			<p>名片管理系统
-			           版权所有©2013 sdkd信息软件102开发小组
-			          保留所有权利。
-			          本系统有朱恒、张贺、王文波、孙中强参与开发。               
+			<p>名片管理系统<br/>
+			           版权所有©2013 sdkd信息软件102开发小组<br/>
+			          保留所有权利。<br/>
+			          本系统有朱恒、张贺、王文波、孙中强参与开发。<br/>               
 			</p>
 		</div>
 		<div class="modal-footer">
