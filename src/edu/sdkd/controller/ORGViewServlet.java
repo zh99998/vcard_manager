@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import edu.sdkd.dao.CardDao;
 import edu.sdkd.dao.impl.CardDaoImpl;
 import edu.sdkd.domain.Card;
@@ -51,7 +53,7 @@ public class ORGViewServlet extends HttpServlet {
 			}
 		}
 		
-		request.setAttribute("orgview", orgview);
+		request.setAttribute("orgview", JSONObject.fromObject(orgview));
 		
 		request.getRequestDispatcher("/orgview.jsp").forward(request, response);
 		

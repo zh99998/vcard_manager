@@ -629,7 +629,7 @@ body {
 	
 		"key" : "Parent 1",
 		"values" : [ {
-			"key" : "Parent 1 Child 1", "value": 123
+			"key" : "Parent 1 Child 1"
 		}, {
 			"key" : "Parent 1 Child 2"
 		}, {
