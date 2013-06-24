@@ -4,16 +4,23 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.Properties;
+
+import edu.sdkd.utils.Utils;
 
 public class MyDataSource {
-	String driver = "com.mysql.jdbc.Driver";
-	private static String url = "jdbc:mysql://zhang-pc:3306/vcard_manager";
-	private static String user = "root";
-	private static String password = "root";
 	
-	private static int initCount = 5;
-	private static int maxCount = 100;
-	private int currentCount = 0;
+	private static Properties properties = Utils.readProperties("db.properties");
+	
+	private static String driver = properties.getProperty("driver");
+	private static String url = properties.getProperty("url");
+	private static String user = properties.getProperty("user");
+	private static String password = properties.getProperty("password");
+	
+	private static int initCount = Integer.valueOf(properties.getProperty("initCount"));
+	private static int maxCount = Integer.valueOf(properties.getProperty("maxCount"));
+	private static int currentCount = Integer.valueOf(properties.getProperty("currentCount"));
+	
 	LinkedList<Connection> connectionsPool = new LinkedList<Connection>();
 	
 	public MyDataSource() {
@@ -46,11 +53,13 @@ public class MyDataSource {
 	private Connection createConnection() throws SQLException{
 		try {
 			Class.forName(driver);
+			Connection realConn = DriverManager.getConnection(url, user, password);
+			MyConnectionHandler proxy = new MyConnectionHandler(this);
+			return proxy.bind(realConn);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		Connection realConn = DriverManager.getConnection(url, user, password);
-		MyConnectionHandler proxy = new MyConnectionHandler(this);
-		return proxy.bind(realConn);
+		return null;
+		
 	}
 }
