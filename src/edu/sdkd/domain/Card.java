@@ -1,8 +1,11 @@
 package edu.sdkd.domain;
 
+import edu.sdkd.dao.InfoDao;
+import edu.sdkd.dao.impl.InfoDaoImpl;
 import edu.sdkd.utils.Constant;
 
 import java.util.Date;
+import java.util.List;
 
 import com.mysql.jdbc.Blob;
 
@@ -56,6 +59,11 @@ public class Card {
 	}
 	public void setImgFront(java.sql.Blob blob) {
 		this.imgFront = (Blob) blob;
+	}
+	public List<Info> getInfoes() {
+		InfoDao infoDao = new InfoDaoImpl();
+		List<Info> infoes = infoDao.getInfoesByCard(id);
+		return infoes;
 	}
 	
 }

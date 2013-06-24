@@ -120,7 +120,7 @@ public class CardDaoImpl implements CardDao{
 		ResultSet rs = null;
 		try {
 			conn = dataSource.getConnection();
-			Card card = new Card();
+			Card card;
 			String sql = "select * from card;";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
