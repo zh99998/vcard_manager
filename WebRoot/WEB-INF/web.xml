@@ -28,6 +28,20 @@
     <servlet-name>ExportServlet</servlet-name>
     <servlet-class>edu.sdkd.controller.ExportServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DepartViewServlet</servlet-name>
+    <servlet-class>edu.sdkd.controller.DepartViewServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ORGViewServlet</servlet-name>
+    <servlet-class>edu.sdkd.controller.ORGViewServlet</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -47,6 +61,14 @@
   <servlet-mapping>
     <servlet-name>ExportServlet</servlet-name>
     <url-pattern>/servlet/ExportServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DepartViewServlet</servlet-name>
+    <url-pattern>/servlet/DepartViewServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ORGViewServlet</servlet-name>
+    <url-pattern>/servlet/ORGViewServlet</url-pattern>
   </servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>first.jsp</welcome-file>

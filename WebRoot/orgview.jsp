@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -28,6 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body>
+<!--  (Map<String, Set<Card>>)request.getAttribute("orgview"). -->
 	<!-- header -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
@@ -622,7 +624,9 @@ body {
 	/* Create our data objects.
 	 * Formatted like d3.js's nest() function.
 	 */
+	 
 	var data = [ {
+	
 		"key" : "Parent 1",
 		"values" : [ {
 			"key" : "Parent 1 Child 1", "value": 123

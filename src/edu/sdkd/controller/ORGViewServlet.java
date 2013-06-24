@@ -2,7 +2,12 @@ package edu.sdkd.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +19,7 @@ import edu.sdkd.dao.impl.CardDaoImpl;
 import edu.sdkd.domain.Card;
 import edu.sdkd.domain.Info;
 
-public class ExportServlet extends HttpServlet {
+public class ORGViewServlet extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
@@ -29,25 +34,34 @@ public class ExportServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/x-vcard");
-		PrintWriter out = response.getWriter();
-
 		CardDao cardDao = new CardDaoImpl();
-		List<Card> cards = cardDao.list();
-		for(Card card:cards){
-			out.println("BEGIN:VCARD");
-			out.println("VERSION:2.1");
+		Map<String, Set<Card>> orgview = new HashMap<String, Set<Card>>();
+		for(Card card:cardDao.list()){
+			//out.println(card);
 			for(Info info:card.getInfoes()){
-				String line = info.getProperty();
-				if(info.getType() != null)
-					line += ";" + info.getType();
-				line += ":"+info.getValue();
-				out.println(line);
+				//out.println(info.getProperty());
+				if(info.getProperty().equals("ORG")){
+					//out.println(info);
+					if(orgview.get(info.getValue()) == null){
+						orgview.put(info.getValue(), new HashSet());
+					}
+					orgview.get(info.getValue()).add(card);
+					break;
+				}
 			}
-			out.println("END:VCARD");
 		}
-		out.flush();
-		out.close();
+		
+		request.setAttribute("orgview", orgview);
+		
+		request.getRequestDispatcher("/orgview.jsp").forward(request, response);
+		
+		
+		//out.println(orgview);
+		//out.flush();
+		//out.close();
+		
+		
+
 	}
 
 }
