@@ -12,6 +12,8 @@ public class Utils {
 	//得到当前时间
 	public static String getCurrentTime() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//		String date = "2013-05-23";
+//		Date date = formatter.parse("date");
 		Date curDate = new Date(System.currentTimeMillis());// 获取当前时间
 		return formatter.format(curDate);
 	}

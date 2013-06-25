@@ -5,7 +5,14 @@ public class Info {
 	private String property;
 	private String type;
 	private String value;
+	private int cardId;
 	
+	public int getCardId() {
+		return cardId;
+	}
+	public void setCardId(int cardId) {
+		this.cardId = cardId;
+	}
 	public int getId() {
 		return id;
 	}

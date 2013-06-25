@@ -1,4 +1,4 @@
-package edu.sdkd.controller;
+package edu.sdkd.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,9 +24,10 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		System.out.println("---向数据库中注册用户---");*/
+		//对表单提交的字段进行合法性校验
 		
 		boolean b = isTokenValid(request);
-		if(!b){
+		if(!b){ 
 			System.out.println("请不要重复提交");
 			return;
 		}

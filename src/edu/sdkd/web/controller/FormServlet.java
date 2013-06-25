@@ -1,4 +1,4 @@
-package edu.sdkd.controller;
+package edu.sdkd.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,9 +53,9 @@ class TokenProcessor{  //令牌
 			byte[] md5 = md.digest(token.getBytes());
 			
 			//base64编码
-			BASE64Encoder encode = new BASE64Encoder();
+			BASE64Encoder encoder = new BASE64Encoder();
 			
-			return encode.encode(md5);
+			return encoder.encode(md5);
 			
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);

@@ -3,10 +3,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>   
-    <title>My JSP 'first.jsp' starting page</title>  
+    <title>first.jsp</title>  
   </head>
   
   <body>
-    <jsp:forward page="/servlet/FormServlet"></jsp:forward>
+    <jsp:forward page="${pageContext.request.contextPath }/servlet/FormServlet"></jsp:forward>
   </body>
 </html>
