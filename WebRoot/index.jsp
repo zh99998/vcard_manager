@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -20,6 +21,11 @@
 		<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+		<style>
+			tr:hover {
+				background-color: #F2F2F2;
+			}
+		</style>
 
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -183,8 +189,7 @@ body {
 					<div class="btn-group">
 						<a href="#new_card" class="btn dropdown-toggle"
 							style="width: 65px;" data-toggle="modal"> <i
-							class="icon-user"> <!-- -->
-						</i><i class="icon-plus"> <!--  -->
+							class="icon-user"> <!-- --> </i><i class="icon-plus"> <!--  -->
 						</i><span style="margin: 3px 10px;"></span> <span class="caret"></span>
 						</a>
 
@@ -266,8 +271,26 @@ body {
 
 					<div>
 						<br />
-						
-						This is my JSP page.
+						<table style="width: 100%">
+							<c:forEach var="cardEntry" items="${cardInfoesMap}">
+								
+								<tr><input type="checkbox" />
+									<td>
+										${cardEntry.value.FN}
+									</td>
+									<td>
+										${cardEntry.value.EMAIL}
+									</td>
+									<td>
+										${cardEntry.value.TEL}
+									</td>
+									<td>
+										${cardEntry.value.ORG}
+									</td>
+								</tr>
+								<br />
+							</c:forEach>
+						</table>
 					</div>
 
 				</div>
