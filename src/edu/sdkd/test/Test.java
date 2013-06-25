@@ -2,10 +2,11 @@ package edu.sdkd.test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import org.junit.Before;
-
 import edu.sdkd.dao.CardDao;
 import edu.sdkd.dao.impl.CardDaoImpl;
 import edu.sdkd.datasource.MyDataSource;
@@ -31,5 +32,15 @@ public class Test {
 		System.out.println(properties.getProperty("url"));
 		System.out.println(properties.getProperty("user"));
 		System.out.println(properties.getProperty("password"));
+	}
+	
+	@org.junit.Test
+	public void testMap(){
+		String a="zhang";
+		String b="zhang";
+		Map<String,String> map = new HashMap<String, String>();
+		map.put(a, "30");
+		System.out.println(map.get(b));
+		System.out.println(map.get("zhang"));
 	}
 }

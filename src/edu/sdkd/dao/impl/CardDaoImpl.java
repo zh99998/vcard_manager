@@ -17,7 +17,7 @@ import edu.sdkd.domain.Card;
 
 public class CardDaoImpl implements CardDao{
 	public void addCard(Card card) {
-		MyDataSource dataSource = new MyDataSource();
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -40,7 +40,7 @@ public class CardDaoImpl implements CardDao{
 	}
 	
 	public void delete(Card card) {
-		MyDataSource dataSource = new MyDataSource();
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
@@ -57,7 +57,7 @@ public class CardDaoImpl implements CardDao{
 	}
 
 	public Card getCard(int id) {
-		MyDataSource dataSource = new MyDataSource();
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -92,7 +92,7 @@ public class CardDaoImpl implements CardDao{
 	}
 
 	public void update(Card card) {
-		MyDataSource dataSource = new MyDataSource();
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -113,7 +113,7 @@ public class CardDaoImpl implements CardDao{
 	}
 	
 	public List<Card> list(){
-		MyDataSource dataSource = new MyDataSource();
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		List listCard = new ArrayList<Card>();
 		Connection conn = null;
 		PreparedStatement ps = null;

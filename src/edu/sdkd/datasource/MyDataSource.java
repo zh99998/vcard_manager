@@ -23,7 +23,7 @@ public class MyDataSource {
 	
 	LinkedList<Connection> connectionsPool = new LinkedList<Connection>();
 	
-	public MyDataSource() {
+	{
 		for(int i=0;i<initCount;i++){
 			try {
 				this.connectionsPool.addLast(this.createConnection());
@@ -32,6 +32,14 @@ public class MyDataSource {
 				throw new ExceptionInInitializerError();
 			}
 		}
+	}
+	private static final MyDataSource myDataSource = MyDataSource.getMyDataSource();
+	private MyDataSource(){
+		
+	}
+	
+	public static MyDataSource getMyDataSource(){
+		return myDataSource;
 	}
 	
 	public Connection getConnection() throws SQLException{

@@ -4,7 +4,14 @@ public class User {
 	private int id;
 	private String name;
 	private String password;
+	private boolean admin;
 	
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 	public int getId() {
 		return id;
 	}

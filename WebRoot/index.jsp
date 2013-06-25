@@ -22,10 +22,10 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 		<style>
-			tr:hover {
-				background-color: #F2F2F2;
-			}
-		</style>
+tr:hover {
+	background-color: #F2F2F2;
+}
+</style>
 
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/bootstrap-responsive.css" rel="stylesheet">
@@ -273,8 +273,11 @@ body {
 						<br />
 						<table style="width: 100%">
 							<c:forEach var="cardEntry" items="${cardInfoesMap}">
-								
-								<tr><input type="checkbox" />
+
+								<tr >
+									<td>
+										<input type="checkbox" />
+									</td>
 									<td>
 										${cardEntry.value.FN}
 									</td>

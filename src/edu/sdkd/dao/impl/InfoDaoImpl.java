@@ -48,7 +48,7 @@ public class InfoDaoImpl implements InfoDao{
 	
 	public List<Info> getInfoesByCard(int cardId){
 		
-		MyDataSource dataSource = new MyDataSource();
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		List listInfo = new ArrayList<Info>();
 		Connection conn = null;
 		PreparedStatement ps = null;
