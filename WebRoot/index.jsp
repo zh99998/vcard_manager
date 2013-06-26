@@ -33,6 +33,18 @@ tr:hover {
 </script>
 		<script src="js/bootstrap.js">
 </script>
+<script type="text/javascript">
+	function deleteItem(id){
+		var b = window.confirm("确定删除？");
+		if(b){
+			window.location.href="";
+		}
+	}
+
+	function toCards(id){
+		window.location.href="${pageContext.request.contextPath }/servlet/SelectInfoServlet?id=" + id;
+	}
+</script>
 
 	</head>
 
@@ -274,9 +286,9 @@ body {
 						<table style="width: 100%">
 							<c:forEach var="cardEntry" items="${cardInfoesMap}">
 
-								<tr >
+								<tr onclick="toCards(${cardEntry.key.id})">	
 									<td>
-										<input type="checkbox" />
+										<input type="checkbox" class="cardentrycheckbox"/>
 									</td>
 									<td>
 										${cardEntry.value.FN}
@@ -300,6 +312,10 @@ body {
 			</div>
 		</div>
 
-
+	<script>
+		$('.cardentrycheckbox').click(function(event){
+			event.stopPropagation()
+		})
+	</script>
 	</body>
 </html>

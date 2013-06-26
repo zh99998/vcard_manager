@@ -16,7 +16,6 @@ import edu.sdkd.domain.Info;
 public class InfoDaoImpl implements InfoDao{
 
 	public void addInfo(Info info) {
-		// TODO Auto-generated method stub
 		
 	}
 

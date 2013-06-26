@@ -54,7 +54,6 @@ class TokenProcessor{  //令牌
 			
 			//base64编码
 			BASE64Encoder encoder = new BASE64Encoder();
-			
 			return encoder.encode(md5);
 			
 		} catch (NoSuchAlgorithmException e) {

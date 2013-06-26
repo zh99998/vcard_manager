@@ -104,7 +104,7 @@ public class CardDaoImpl implements CardDao{
 			ps.setBlob(2, card.getImgBack());
 			ps.setBlob(3, card.getImgFront());
 			ps.setBoolean(4, card.isMe());
-			rs = ps.executeQuery();
+			int lineModified = ps.executeUpdate();
 		} catch (SQLException e){
 			throw new DaoException(e.getMessage(), e);
 		}finally {

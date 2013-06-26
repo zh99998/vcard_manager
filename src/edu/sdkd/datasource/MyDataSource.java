@@ -33,7 +33,7 @@ public class MyDataSource {
 			}
 		}
 	}
-	private static final MyDataSource myDataSource = MyDataSource.getMyDataSource();
+	private static final MyDataSource myDataSource = new MyDataSource();
 	private MyDataSource(){
 		
 	}
