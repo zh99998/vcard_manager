@@ -14,12 +14,13 @@ public class UserDaoImpl implements UserDao {
 
 	public User find(String name, String password) {
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
-		User user = null;
+
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			conn = dataSource.getConnection();
+			User user = new User();
 			String sql = "select id,name,password,admin from user where name=? and password=?;";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, name);

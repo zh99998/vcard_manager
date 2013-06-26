@@ -19,6 +19,7 @@ public class FormServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 
 		//产生随机数(表单号)
 		TokenProcessor tp = TokenProcessor.getInstance();

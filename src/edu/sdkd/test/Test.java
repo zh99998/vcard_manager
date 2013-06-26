@@ -10,6 +10,9 @@ import org.junit.Before;
 import edu.sdkd.dao.CardDao;
 import edu.sdkd.dao.impl.CardDaoImpl;
 import edu.sdkd.datasource.MyDataSource;
+import edu.sdkd.domain.User;
+import edu.sdkd.service.UserService;
+import edu.sdkd.service.impl.UserServiceImpl;
 import edu.sdkd.utils.Utils;
 
 public class Test {
@@ -42,5 +45,16 @@ public class Test {
 		map.put(a, "30");
 		System.out.println(map.get(b));
 		System.out.println(map.get("zhang"));
+	}
+	
+	@org.junit.Test
+	public void testLogin(){
+		UserService loginService = new UserServiceImpl();
+		User user = loginService.login("xiao", "456");
+		if(user!=null){
+			System.out.println(user.getId());
+		}else {
+			System.out.println("login failed");
+		}
 	}
 }

@@ -35,13 +35,23 @@
     <servlet-class>edu.sdkd.web.controller.ORGViewServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>CardServlet</servlet-name>
+    <servlet-name>CardInfoesServlet</servlet-name>
     <servlet-class>edu.sdkd.web.controller.CardInfoesServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>SelectInfoServlet</servlet-name>
     <servlet-class>edu.sdkd.web.controller.SelectInfoServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>InfoServlet</servlet-name>
+    <servlet-class>edu.sdkd.web.controller.InfoServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CaptchaServlet</servlet-name>
+    <servlet-class>edu.sdkd.web.controller.CaptchaServlet</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -60,7 +70,7 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/servlet/LoginServlet</url-pattern>
+    <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ExportServlet</servlet-name>
@@ -71,12 +81,20 @@
     <url-pattern>/servlet/ORGViewServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>CardServlet</servlet-name>
+    <servlet-name>CardInfoesServlet</servlet-name>
     <url-pattern>/servlet/CardInfoesServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>SelectInfoServlet</servlet-name>
     <url-pattern>/servlet/SelectInfoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>InfoServlet</servlet-name>
+    <url-pattern>/servlet/InfoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CaptchaServlet</servlet-name>
+    <url-pattern>/CaptchaServlet</url-pattern>
   </servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>first.jsp</welcome-file>
