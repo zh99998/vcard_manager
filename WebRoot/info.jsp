@@ -104,7 +104,7 @@ $('.dropdown-menu').click(function(e) {
 		<hr />
 		<div>
 			<c:forEach var="info" items="${infoesList}">
-				<div class="row">
+				<div id="info${info.id}" class="row">
 					<div class="span3">
 						<c:choose>
 							<c:when test="${info.property=='FN'}">
@@ -143,7 +143,7 @@ $('.dropdown-menu').click(function(e) {
 						</c:choose>
 					</div>
 					<div class="span2">
-						<a href="#"> <i class="icon-remove-circle" style="width:20px;"></i></a>
+						<a href="#" onclick="deleteRow(${info.id})"> <i class="icon-remove-circle" style="width:20px;"></i></a>
 					</div>
 				</div>
 			</c:forEach>
@@ -239,6 +239,15 @@ $(document).ready(function() {
 		$('.edit').editable(
 				'${pageContext.request.contextPath }/servlet/InfoServlet', {});
 	});
+
+</script>
+
+<script type="text/javascript">
+	function deleteRow(info_id){
+		$('#info'+info_id).remove();
+		
+	};
+
 </script>
 
 	</body>

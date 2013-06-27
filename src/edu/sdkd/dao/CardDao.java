@@ -10,4 +10,5 @@ public interface CardDao {
 	public void update(Card card);
 	public void delete(Card card);
 	public List<Card> list();
+	
 }

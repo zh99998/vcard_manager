@@ -7,6 +7,6 @@ public interface InfoDao {
 	public void addInfo(Info info);	
 	public Info getInfo(int id);
 	public void update(Info info);
-	public void delete(Info info);
+	public void delete(int id);
 	public List<Info> getInfoesByCard(int cardId);
 }

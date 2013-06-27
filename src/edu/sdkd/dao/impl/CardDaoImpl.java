@@ -33,7 +33,7 @@ public class CardDaoImpl implements CardDao{
 			ps.setBlob(6, card.getImgFront());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			throw new DaoException(e.getMessage(), e);
+			throw new DaoException("添加card信息失败", e);
 		} finally {
 			dataSource.free(conn);
 		}
@@ -50,7 +50,7 @@ public class CardDaoImpl implements CardDao{
 			st = conn.createStatement();
 			st.executeUpdate(sql);
 		} catch (SQLException e){
-			throw new DaoException(e.getMessage(), e);
+			throw new DaoException("删除card信息失败", e);
 		}finally {
 			dataSource.free(conn);
 		}
@@ -71,7 +71,7 @@ public class CardDaoImpl implements CardDao{
 				card = mappingCard(rs);
 			}
 		} catch (SQLException e){
-			throw new DaoException(e.getMessage(), e);
+			throw new DaoException("获取card信息失败", e);
 		}finally {
 			dataSource.free(conn);
 		}
@@ -106,7 +106,7 @@ public class CardDaoImpl implements CardDao{
 			ps.setBoolean(4, card.isMe());
 			int lineModified = ps.executeUpdate();
 		} catch (SQLException e){
-			throw new DaoException(e.getMessage(), e);
+			throw new DaoException("更新card信息失败", e);
 		}finally {
 			dataSource.free(conn);
 		}
@@ -129,7 +129,7 @@ public class CardDaoImpl implements CardDao{
 				listCard.add(card);
 			}
 		} catch (SQLException e){
-			throw new DaoException(e.getMessage(), e);
+			throw new DaoException("获取card列表失败", e);
 		}finally {
 			dataSource.free(conn);
 		}

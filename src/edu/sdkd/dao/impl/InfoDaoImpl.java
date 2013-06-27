@@ -15,25 +15,6 @@ import edu.sdkd.domain.Info;
 
 public class InfoDaoImpl implements InfoDao{
 
-	public void addInfo(Info info) {
-		
-	}
-
-	public void delete(Info info) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public Info getInfo(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void update(Info info) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	private Info mappingInfo(ResultSet rs) throws SQLException {
 		Info info = new Info();
 		info.setId(rs.getInt("id"));
@@ -71,5 +52,87 @@ public class InfoDaoImpl implements InfoDao{
 		return listInfo;
 		
 	}
-	
+
+	public void addInfo(Info info) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "insert into info(property,type,value,card) values(?,?,?,?);";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, info.getProperty());
+			ps.setString(2, info.getType());
+			ps.setString(3, info.getValue());
+			ps.setInt(4, info.getCardId());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new DaoException("添加info信息失败", e);
+		} finally {
+			dataSource.free(conn);
+		}
+	}
+
+	public void delete(int id) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "delete info where id=?;";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new DaoException("删除info信息失败", e);
+		} finally {
+			dataSource.free(conn);
+		}
+	}
+
+	public Info getInfo(int id) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Info info = new Info();
+		try {
+			String sql = "select * from info  where id=?;";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				info = mappingInfo(rs);
+			}
+		} catch (SQLException e){
+			throw new DaoException(e.getMessage(), e);
+		}finally {
+			dataSource.free(conn);
+		}
+		return info;
+	}
+
+	public void update(Info info) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "update info  set property=?,type=?,value=? where id=?;";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, info.getProperty());
+			ps.setString(2, info.getType());
+			ps.setString(3, info.getValue());
+			ps.setInt(4, info.getId());
+			ps.executeUpdate();
+		} catch (SQLException e){
+			throw new DaoException("更新info信息失败", e);
+		}finally {
+			dataSource.free(conn);
+		}
+	}
+
 }

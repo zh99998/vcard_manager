@@ -39,7 +39,7 @@ tr:hover {
 		if(b){
 			window.location.href="";
 		}
-	}
+	};
 
 	function toCards(id){
 		window.location.href="${pageContext.request.contextPath }/servlet/SelectInfoServlet?id=" + id;
