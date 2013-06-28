@@ -27,15 +27,16 @@ public class CircleCardDaoImpl implements CircleCardDao {
 		try {
 			conn = dataSource.getConnection();
 			CircleCard circlecard=new CircleCard();
-			String sql = "select * from circlecard;";
+			String sql = "select * from circle_cards;";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				circlecard = mappingCircleCard(rs);
 				listCircleCard.add(circlecard);
+				System.out.println(10);
 			}
 		} catch (SQLException e) {
-			throw new DaoException("获取circlecard列表失败", e);
+			throw new DaoException("获取circlecard列表失败1", e);
 		} finally {
 			dataSource.free(conn);
 		}
@@ -50,15 +51,11 @@ public class CircleCardDaoImpl implements CircleCardDao {
 	}
 
 	public List<Integer> getCardId(int circleId) {
-		System.out.println("16");
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
-		System.out.println("22");
 		List<Integer> listCardId = new ArrayList<Integer>();
-		System.out.println("23");
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		System.out.println("17");
 		try {
 			conn = dataSource.getConnection();
 			String sql = "select cards from circle_cards where circle=?;";
@@ -66,19 +63,63 @@ public class CircleCardDaoImpl implements CircleCardDao {
 			System.out.println("18");
 			ps.setInt(1, circleId);
 			rs = ps.executeQuery();
-			System.out.println("19");
 			while (rs.next()) {
 				int cardId = rs.getInt("cards");
 				listCardId.add(cardId);
 			}
 			System.out.println("20");
 		} catch (SQLException e) {
-			throw new DaoException("获取circlecard列表失败", e);
+			throw new DaoException("获取circlecard列表失败2", e);
 		} finally {
 			dataSource.free(conn);
 		}
 		System.out.println("21");
 		return listCardId;
+	}
+
+	public List<Integer> getCircleId(int cardId) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		List<Integer> listCardId = new ArrayList<Integer>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "select circle from circle_cards where cards=?;";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, cardId);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				int circleId = rs.getInt("circle");
+				listCardId.add(circleId);
+			}
+		} catch (SQLException e) {
+			throw new DaoException("获取circlecard列表失败2", e);
+		} finally {
+			dataSource.free(conn);
+		}
+		return listCardId;
+	}
+
+	//把一个card放到circle
+	public void addCard2Circle(int cardId, int circleId) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			CircleCard circlecard=new CircleCard();
+			String sql = "insert into circle_cards(circle,cards) values(?,?)";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, circleId);
+			ps.setInt(2, cardId);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new DaoException("获取circlecard列表失败1", e);
+		} finally {
+			dataSource.free(conn);
+		}
 	}
 
 }

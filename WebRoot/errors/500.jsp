@@ -18,7 +18,7 @@ h1{
 	padding:230px 0 0;
 	overflow:hidden;
 	xxxxborder:1px solid;
-	background-image: url(img/Main.jpg);
+	background-image: url(img/500.jpg);
 	background-repeat: no-repeat;
 }
 h2{

@@ -22,15 +22,21 @@ import edu.sdkd.domain.Info;
 import edu.sdkd.service.CardService;
 import edu.sdkd.service.impl.CardServiceImpl;
 
-public class CardInfoesServlet extends HttpServlet {
+public class SearchServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		
+		System.out.println("1");
+		
 		CardService cardService = new CardServiceImpl();
-		Map<Card, CardInfoBean> cardInfoesMap = cardService.getAllCardPartInfoes();
+		System.out.println("2");
+		Map<Card, CardInfoBean> cardInfoesMap = cardService.search(request.getParameter("key"));
+		
+		System.out.println("3");
 		request.setAttribute("cardInfoesMap", cardInfoesMap);
+		System.out.println("4");
 		
 		
 		CircleDao circleDao = new CircleDaoImpl();
@@ -48,7 +54,9 @@ public class CardInfoesServlet extends HttpServlet {
 		request.setAttribute("num", circlecards);
 		
 		
+		
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		System.out.println("5");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

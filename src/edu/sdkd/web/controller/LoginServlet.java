@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 				uid = user.getId();
 				request.getSession().setAttribute("uid", uid);// 保存登录用户ID
 				// out.print("登录成功");
-				response.sendRedirect("servlet/CardInfoesServlet");
+				response.sendRedirect("");
 			} else {
 				// fail
 				request.setAttribute("failed", "用户名或密码错误");

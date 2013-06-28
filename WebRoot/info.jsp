@@ -9,24 +9,25 @@
 		<meta http-equiv="description" content="this is my page">
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-		<link rel="stylesheet" type="text/css" href="../css/styles.css">
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
 		<link rel="stylesheet" type="text/css"
-			href="../css/bootstrap-responsive.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/bootstrap-combobox.css">
+			href="css/bootstrap-responsive.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css"
+			href="css/bootstrap-combobox.css">
 
-		<script src="../js/jquery-1.8.3.min.js">
+		<script src="js/jquery-1.8.3.min.js">
 </script>
-		<script src="../js/bootstrap.min.js">
+		<script src="js/bootstrap.min.js">
 </script>
-		<script src="../js/jquery.editable.min.js">
+		<script src="js/jquery.editable.min.js">
 </script>
-<script src="../js/bootstrap-combobox.js">
+		<script src="js/bootstrap-combobox.js">
 </script>
 	</head>
 
 	<body>
-
+		${circles}
 		<div class="container">
 			<div class="btn-group">
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
@@ -40,21 +41,23 @@
 					class="icon-plus-sign"></i><span style="margin: 3px 10px;"></span>
 					<span class="caret"></span> </a>
 				<ul class="dropdown-menu">
-					<li>
-						<input>
-						<i class="icon-search"></i>
-						</input>
-					</li>
 					<li class="divider"></li>
-					<li>
-						<input type="checkbox" style="margin: 3px 10px;">
-						通讯录
-						</input>
-					</li>
-					<li class="divider"></li>
-					<li>
-						<a tabindex="-1" href="#">新建</a>
-					</li>
+
+					<c:forEach var="circle" items="${circleMap}">
+						<li>
+							<c:choose>
+								<c:when test="${circle.value}">
+									<input class="circlecheckbox" data-circleId="${circle.key.id}" type="checkbox" style="margin: 3px 10px;" checked />
+								</c:when>
+								<c:otherwise>
+									<input class="circlecheckbox" data-circleId="${circle.key.id}" type="checkbox" style="margin: 3px 10px;"/>
+								</c:otherwise>
+							</c:choose>
+							${circle.key.name}
+						</li>
+
+					</c:forEach>
+
 				</ul>
 				<script>
 $('.dropdown-menu').click(function(e) {
@@ -140,6 +143,13 @@ $('.dropdown-menu').click(function(e) {
 									<img src="data:image/png;base64,${info.value}" />
 								</div>
 							</c:when>
+							<c:when test="${info.property == 'EMAIL'}">
+								<div style="width: 200px; height: 20px; float: left;"
+									class="edit" id="infodiv_${info.id}">
+									${info.value}
+								</div>
+								<a href="mailto:${info.value}" <i class="icon-envelope"></i></a>
+							</c:when>
 							<c:otherwise>
 								<div style="width: 200px; height: 20px; float: left;"
 									class="edit" id="infodiv_${info.id}">
@@ -159,30 +169,56 @@ $('.dropdown-menu').click(function(e) {
 		<div>
 			<div class="span4">
 				<select class="combobox">
-					<option value="ADD">添加</option>
-					<option value="FN">姓名</option>
-					<option value="EMAIL">邮箱</option>
-					<option value="TEL">电话</option>
-					<option value="ORG">公司</option>
+					<option value="ADD">
+						添加
+					</option>
+					<option value="FN">
+						姓名
+					</option>
+					<option value="EMAIL">
+						邮箱
+					</option>
+					<option value="TEL">
+						电话
+					</option>
+					<option value="ORG">
+						公司
+					</option>
 				</select>
 			</div>
 			<script>
-				$('.combobox').change(function(ev){
-					$('<div />', {'class':'row'}).append([
-						$('<div />', {'class': 'span3'}).append($('<span/>', {'text': this.value})),
-						$('<div />', {'class': 'span7'}).append($('<div/>', {'id': 'create_'+this.value, 'class': 'edit', 'text': '点击编辑'})),
-						$('<div />', {'class': 'span2'}),
-						
-						]).appendTo('#infoes')
-						$('.edit').editable(
-				'${pageContext.request.contextPath }/servlet/InfoServlet?card_id=${card.id}', {});
+$('.combobox')
+		.change(
+				function(ev) {
+					$('<div />', {
+						'class' : 'row'
+					}).append( [ $('<div />', {
+						'class' : 'span3'
+					}).append($('<span/>', {
+						'text' : this.value
+					})), $('<div />', {
+						'class' : 'span7'
+					}).append($('<div/>', {
+						'id' : 'create_' + this.value,
+						'class' : 'edit',
+						'text' : '点击编辑'
+					})), $('<div />', {
+						'class' : 'span2'
+					}),
+
+					]).appendTo('#infoes')
+					$('.edit')
+							.editable(
+									'${pageContext.request.contextPath }/servlet/InfoServlet?card_id=${card.id}',
+									{});
 					this.value = 'ADD';
 				})
-			</script>
+</script>
 			<%--<div class="span8">
 				<input type="text" class="edit" id="create_${info.id}" style="height:30px;" />
 			</div>
-		--%></div>
+		--%>
+		</div>
 		<hr />
 		${card.id}
 		<div>
@@ -190,33 +226,39 @@ $('.dropdown-menu').click(function(e) {
 				<c:choose>
 					<c:when test="${card.imgFront!=null}">
 						<img src="${card.imgFront}" />
-						<a href="#" onclick="deleteImg(${card.id},'imgFront'); return false;"> <i
+						<a href="#"
+							onclick="deleteImg(${card.id},'imgFront'); return false;"> <i
 							class="icon-remove-circle" style="width: 20px;"></i> </a>
 					</c:when>
 					<c:otherwise>
-						<p>正面图</p>
+						<p>
+							正面图
+						</p>
 						<input id="imgFrontUpload" class="img_upload" type="file" />
 						<div id="imgFront"></div>
 					</c:otherwise>
 				</c:choose>
 			</div>
-			
+
 			<div class="span6">
 				<c:choose>
 					<c:when test="${card.imgBack!=null}">
 						<img src="${card.imgBack}" />
-						<a href="#" onclick="deleteImg(${card.id},'imgBack'); return false;"> <i
+						<a href="#"
+							onclick="deleteImg(${card.id},'imgBack'); return false;"> <i
 							class="icon-remove-circle" style="width: 20px;"></i> </a>
 					</c:when>
 					<c:otherwise>
-						<p>背面图</p>
+						<p>
+							背面图
+						</p>
 						<input id="imgBackUpload" class="img_upload" type="file" />
 						<div id="imgBack"></div>
 					</c:otherwise>
 				</c:choose>
 			</div>
 		</div>
-	<script>
+		<script>
 $(document).ready(function() {
 	//$('.edit').editable();
 		$('.edit').editable(
@@ -258,7 +300,7 @@ function deleteRow(info_id) {
 	});
 };
 
-function deleteImg(card_id,img) {
+function deleteImg(card_id, img) {
 	$.post('CardServlet', {
 		id : card_id,
 		_method : "delete",
@@ -269,14 +311,14 @@ function deleteImg(card_id,img) {
 };
 
 </script>
-<%--<script>
+		<%--<script>
 $(document).ready(function() {
 	$('.combobox').combobox();
 });
 </script>
 	--%>
-	<script>
- $('#imgFrontUpload').change(function(evt){
+		<script>
+$('#imgFrontUpload').change(function(evt){
 $('#imgFrontUpload').attr("disabled",true);   
  	var f = evt.target.files[0];
  	var reader = new FileReader();
@@ -286,7 +328,7 @@ $('#imgFrontUpload').attr("disabled",true);
        return function(e) {
          // Render thumbnail.
          console.log(e.target.result);
-         $.post('${pageContext.request.contextPath}/servlet/CardServlet', {field: 'imgFront', id: ${card.id}, img: e.target.result}, function(){location.reload()});
+         $.post('${pageContext.request.contextPath}/CardServlet', {field: 'imgFront', id: ${card.id}, img: e.target.result}, function(){location.reload()});
          document.getElementById('imgFront').innerHTML =  ['<img class="thumb" src="', e.target.result,
                            '" title="', escape(theFile.name), '"/>'].join('');
        };
@@ -307,7 +349,7 @@ $('#imgBackUpload').attr("disabled",true);
        return function(e) {
          // Render thumbnail.
          console.log(e.target.result);
-         $.post('${pageContext.request.contextPath}/servlet/CardServlet', {field: 'imgBack', id: ${card.id}, img: e.target.result}, function(){location.reload()});
+         $.post('${pageContext.request.contextPath}/CardServlet', {field: 'imgBack', id: ${card.id}, img: e.target.result}, function(){location.reload()});
          var span = document.createElement('span');
          document.getElementById('imgBack').innerHTML =  ['<img class="thumb" src="', e.target.result,
                            '" title="', escape(theFile.name), '"/>'].join('');
@@ -319,6 +361,12 @@ $('#imgBackUpload').attr("disabled",true);
  })
  
  </script>
+ <script>
+ 
+ $('.circlecheckbox').change(function(e){
+	 $.post('/CardCircleServlet', {checked: e.target.checked, circle_id: $(e.target).attr('data-circleId'), card_id: ${card.id}})
+ })
+ </script>
 	</body>
-	
+
 </html>

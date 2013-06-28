@@ -13,6 +13,8 @@ public interface CardService {
 	//得到所有名片的FK,TEL,EMAIL,ORG的信息
 	public abstract Map<Card, CardInfoBean> getAllCardPartInfoes();
 	public abstract Map<Card, CardInfoBean> getAllCardPartInfoes(int circle);
+	//
+	public abstract Map<Card, CardInfoBean> search(String key);
 	//保存上传的正面图片
 	void saveImgFront(int id,String imgFront);
 	//保存上传的背面图片

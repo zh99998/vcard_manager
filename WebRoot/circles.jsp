@@ -43,14 +43,14 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="brand" href="#">ÃûÆ¬¹ÜÀíÏµ½y</a>
+				<a class="brand" href="#">åç‰‡ç®¡ç†ç³»çµ±</a>
 				<div class="nav-collapse collapse">
 					<p class="navbar-text pull-right">
 						Logged in as <a href="#" class="navbar-link">Username</a>
 					</p>
 					<ul class="nav">
-						<li class="active"><a href="#">Ê×Ò³</a></li>
-						<li><a href="#about" data-toggle="modal">¹ØÓÚ</a></li>
+						<li class="active"><a href="#">é¦–é¡µ</a></li>
+						<li><a href="#about" data-toggle="modal">å…³äºŽ</a></li>
 						<!-- <li><a href="#contact">Contact</a></li> -->
 					</ul>
 				</div>
@@ -63,15 +63,15 @@
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true">¡Á</button>
-			<h3 id="myModalLabel">¹ØÓÚÃûÆ¬¹ÜÀíÏµÍ³</h3>
+				aria-hidden="true">Ã—</button>
+			<h3 id="myModalLabel">å…³äºŽåç‰‡ç®¡ç†ç³»ç»Ÿ</h3>
 		</div>
 		<div class="modal-body">
-			<p>ß÷ß÷ß÷ß÷</p>
+			<p>å–µå–µå–µå–µ</p>
 		</div>
 		<div class="modal-footer">
 			<button class="btn btn-primary" data-dismiss="modal"
-				aria-hidden="true">È·¶¨</button>
+				aria-hidden="true">ç¡®å®š</button>
 		</div>
 	</div>
 
@@ -101,36 +101,41 @@ body {
 			<div class="span3">
 				<div class="well sidebar-nav">
 					<ul class="nav nav-list">
-						<li class="active"><a href="#">Í¨Ñ¶Â¼</a></li>
+						<li class="active"><a href="#">é€šè®¯å½•</a></li>
 						<c:forEach var="list" items="${circles}">
 							<li><a href="#edit_circle" data-toggle="modal"
-								onclick="$('#edit_circle_id_input').val(${list.id})">${list.name} (<%= request.getAttribute("num") %>)
+								onclick="$('#edit_circle_id_input').val(${list.id})">${list.name}
+								<c:forEach var="length" items="${num}">
+								<c:if test="${length.key == list.id}">
+								(${length.value})
+								</c:if>
+								</c:forEach>
 								</a>
 							</li>
 						</c:forEach>
 						<!-- Button to trigger modal -->
 						<li><a href="#new_circle" role="button" class="btn"
-							data-toggle="modal" style="width:80px">ÐÂ½¨Èº×é</a></li>
+							data-toggle="modal" style="width:80px">æ–°å»ºç¾¤ç»„</a></li>
 						<li><a href="#myModal" role="button" class="btn"
-							data-toggle="modal" style="width:80px">µ¼ÈëÃûÆ¬</a></li>
+							data-toggle="modal" style="width:80px">å¯¼å…¥åç‰‡</a></li>
 						<!-- Modal -->
 						<div id="new_circle" class="modal hide fade" tabindex="-1"
 							role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
-									aria-hidden="true">¡Á</button>
-								<h3 id="myModalLabel">ÊäÈëÐÂ½¨Èº×éÃû³Æ</h3>
+									aria-hidden="true">Ã—</button>
+								<h3 id="myModalLabel">è¾“å…¥æ–°å»ºç¾¤ç»„åç§°</h3>
 							</div>
 							<form action="servlet/CircleServlet" method="POST">
 								<div class="modal-body">
 
 									<p>
-										ÊäÈë×éÃû <input type="text" name="name" />
+										è¾“å…¥ç»„å <input type="text" name="name" />
 									</p>
 								</div>
 								<div class="modal-footer">
-									<button class="btn" data-dismiss="modal" aria-hidden="true">¹Ø±Õ</button>
-									<button class="btn btn-primary">±£´æ</button>
+									<button class="btn" data-dismiss="modal" aria-hidden="true">å…³é—­</button>
+									<button class="btn btn-primary">ä¿å­˜</button>
 								</div>
 							</form>
 						</div>
@@ -149,8 +154,8 @@ body {
 						style="margin:3px 10px;" /> <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a tabindex="-1" href="#">È«Ñ¡</a></li>
-						<li><a tabindex="-1" href="#">È«²»Ñ¡</a></li>
+						<li><a tabindex="-1" href="#">å…¨é€‰</a></li>
+						<li><a tabindex="-1" href="#">å…¨ä¸é€‰</a></li>
 						<li class="divider"></li>
 					</ul>
 				</div>
@@ -167,7 +172,7 @@ body {
 						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">¡Á</button>
+								aria-hidden="true">Ã—</button>
 							<h3 id="myModalLabel">Modal header</h3>
 						</div>
 						<div class="modal-body">
@@ -175,28 +180,28 @@ body {
 						</div>
 						<div class="modal-footer">
 							<button class="btn" data-dismiss="modal" aria-hidden="true">
-								¹Ø±Õ</button>
-							<button class="btn btn-primary">±£´æ</button>
+								å…³é—­</button>
+							<button class="btn btn-primary">ä¿å­˜</button>
 						</div>
 					</div>
 				</div>
 
 				<div class="btn-group">
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
-						style="width:65px;"> <span style="margin:3px 10px;">¸ü¶à</span>
+						style="width:65px;"> <span style="margin:3px 10px;">æ›´å¤š</span>
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a tabindex="-1" href="#">É¾³ýÁªÏµÈË</a></li>
-						<li><a tabindex="-1" href="#">ºÏ²¢ÁªÏµÈË</a></li>
+						<li><a tabindex="-1" href="#">åˆ é™¤è”ç³»äºº</a></li>
+						<li><a tabindex="-1" href="#">åˆå¹¶è”ç³»äºº</a></li>
 						<li class="divider"></li>
-						<li><a tabindex="-1" href="#">µ¼Èë...</a></li>
-						<li><a tabindex="-1" href="#">µ¼³ö...</a></li>
-						<li><a tabindex="-1" href="departview.jsp">¹«Ë¾²¿ÃÅÊÓÍ¼</a></li>
-						<li><a tabindex="-1" href="#">»¹Ô­Í¨Ñ¶Â¼</a></li>
+						<li><a tabindex="-1" href="#">å¯¼å…¥...</a></li>
+						<li><a tabindex="-1" href="#">å¯¼å‡º...</a></li>
+						<li><a tabindex="-1" href="departview.jsp">å…¬å¸éƒ¨é—¨è§†å›¾</a></li>
+						<li><a tabindex="-1" href="#">è¿˜åŽŸé€šè®¯å½•</a></li>
 						<li class="divider"></li>
-						<li><a tabindex="-1" href="#">Ãû×Ö</a></li>
-						<li><a tabindex="-1" href="#">ÐÕÊÏ</a></li>
+						<li><a tabindex="-1" href="#">åå­—</a></li>
+						<li><a tabindex="-1" href="#">å§“æ°</a></li>
 					</ul>
 				</div>
 
@@ -225,24 +230,24 @@ body {
 		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true">¡Á</button>
-			<h3 id="myModalLabel">ÐÞ¸ÄÈº×éÃû³Æ</h3>
+				aria-hidden="true">Ã—</button>
+			<h3 id="myModalLabel">ä¿®æ”¹ç¾¤ç»„åç§°</h3>
 		</div>
 
 		<form id="editCircleform" action="servlet/CircleServlet" method="POST">
 			<div class="modal-body">
 
 				<p>
-					ÊäÈëÐÞ¸ÄÈº×éÃû <input type="text" name="name" /> 
+					è¾“å…¥ä¿®æ”¹ç¾¤ç»„å <input type="text" name="name" /> 
 					     <input id="edit_circle_id_input" type="hidden" name="id" />
 					      <input type="hidden" name="_method" value="put" />
-					      <input type="submit" value="É¾³ý" onclick="_method.value='delete'"/>
+					      <input type="submit" value="åˆ é™¤" onclick="_method.value='delete'"/>
 				</p>
 			</div>
 
 			<div class="modal-footer">
-				<button class="btn" data-dismiss="modal" aria-hidden="true">¹Ø±Õ</button>
-				<button class="btn btn-primary">±£´æ</button>
+				<button class="btn" data-dismiss="modal" aria-hidden="true">å…³é—­</button>
+				<button class="btn btn-primary">ä¿å­˜</button>
 			</div>
 		</form>
 

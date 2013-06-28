@@ -9,13 +9,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import edu.sdkd.bean.CardInfoBean;
 import edu.sdkd.dao.CardDao;
 import edu.sdkd.dao.DaoException;
 import edu.sdkd.datasource.MyDataSource;
 import edu.sdkd.domain.Card;
 
-public class CardDaoImpl implements CardDao{
+public class CardDaoImpl implements CardDao {
 	public void addCard(Card card) {
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
@@ -38,7 +40,7 @@ public class CardDaoImpl implements CardDao{
 			dataSource.free(conn);
 		}
 	}
-	
+
 	public void delete(Card card) {
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
@@ -46,12 +48,12 @@ public class CardDaoImpl implements CardDao{
 		ResultSet rs = null;
 		try {
 			conn = dataSource.getConnection();
-			String sql = "delete from card  where id=" + card.getId()+";";
+			String sql = "delete from card  where id=" + card.getId() + ";";
 			st = conn.createStatement();
 			st.executeUpdate(sql);
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException("删除card信息失败", e);
-		}finally {
+		} finally {
 			dataSource.free(conn);
 		}
 	}
@@ -68,12 +70,12 @@ public class CardDaoImpl implements CardDao{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				card = mappingCard(rs);
 			}
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException("获取card信息失败", e);
-		}finally {
+		} finally {
 			dataSource.free(conn);
 		}
 		System.out.println(card.toString());
@@ -90,7 +92,7 @@ public class CardDaoImpl implements CardDao{
 		card.setImgBack(rs.getString("img_back"));
 		card.setImgFront(rs.getString("img_front"));
 		return card;
-		
+
 	}
 
 	public void update(Card card) {
@@ -107,14 +109,14 @@ public class CardDaoImpl implements CardDao{
 			ps.setString(3, card.getImgFront());
 			ps.setBoolean(4, card.isMe());
 			int lineModified = ps.executeUpdate();
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException("更新card信息失败", e);
-		}finally {
+		} finally {
 			dataSource.free(conn);
 		}
 	}
-	
-	public List<Card> list(){
+
+	public List<Card> list() {
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		List listCard = new ArrayList<Card>();
 		Connection conn = null;
@@ -126,20 +128,20 @@ public class CardDaoImpl implements CardDao{
 			String sql = "select * from card;";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				card = mappingCard(rs);
 				listCard.add(card);
 			}
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException("获取card列表失败", e);
-		}finally {
+		} finally {
 			dataSource.free(conn);
 		}
 		return listCard;
 	}
 
-	//保存上传的背面图
-	public void saveImgBack(int id,String imgFront) {
+	// 保存上传的背面图
+	public void saveImgBack(int id, String imgFront) {
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -151,14 +153,15 @@ public class CardDaoImpl implements CardDao{
 			ps.setString(1, imgFront);
 			ps.setInt(2, id);
 			ps.executeUpdate();
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException("上传背面图失败", e);
-		}finally {
+		} finally {
 			dataSource.free(conn);
 		}
 	}
-	//保存上传的正面图
-	public void saveImgFront(int id,String imgBack) {
+
+	// 保存上传的正面图
+	public void saveImgFront(int id, String imgBack) {
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -170,14 +173,14 @@ public class CardDaoImpl implements CardDao{
 			ps.setString(1, imgBack);
 			ps.setInt(2, id);
 			ps.executeUpdate();
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException("上传正面图失败", e);
-		}finally {
+		} finally {
 			dataSource.free(conn);
 		}
 	}
 
-	//删除背面图
+	// 删除背面图
 	public void deleteImgBack(int id) {
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
@@ -189,14 +192,14 @@ public class CardDaoImpl implements CardDao{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			ps.executeUpdate();
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException("删除背面图失败", e);
-		}finally {
+		} finally {
 			dataSource.free(conn);
 		}
 	}
 
-	//删除正面图
+	// 删除正面图
 	public void deleteImgFront(int id) {
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
@@ -208,11 +211,81 @@ public class CardDaoImpl implements CardDao{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			ps.executeUpdate();
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException("删除正面图失败", e);
-		}finally {
+		} finally {
 			dataSource.free(conn);
 		}
+	}
+
+	public void deleteCard(String cardId) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "delete from card  where id in(" + cardId + ");";
+			st = conn.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			throw new DaoException("删除card信息失败", e);
+		} finally {
+			dataSource.free(conn);
+		}
+	}
+
+	public int addCardAndGetId(Card card) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "insert into card() values();";
+			ps = conn.prepareStatement(sql);
+			
+			ps.executeUpdate(sql, ps.RETURN_GENERATED_KEYS);
+			rs = ps.getGeneratedKeys();
+			if(rs.next()){
+				
+				System.out.println(rs.getInt(1));
+				
+			}
+			return rs.getInt(1);	
+		} catch (SQLException e) {
+			throw new DaoException("添加card信息失败", e);
+		} finally {
+			dataSource.free(conn);
+		}
+	}
+
+	public List<Card> search(String key) {
+		
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		List listCard = new ArrayList<Card>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			Card card;
+			String sql = "select * from card where id in (select card from info where instr(value, ?));";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, key);
+			System.out.println(ps);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				card = mappingCard(rs);
+				listCard.add(card);
+			}
+		} catch (SQLException e) {
+			throw new DaoException("获取card列表失败", e);
+		} finally {
+			dataSource.free(conn);
+		}
+		return listCard;
 	}
 	
 }

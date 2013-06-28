@@ -14,7 +14,7 @@ import edu.sdkd.datasource.MyDataSource;
 import edu.sdkd.domain.Card;
 import edu.sdkd.domain.Circle;
 
-public class CircleDaoImpl implements CircleDao{
+public class CircleDaoImpl implements CircleDao {
 	public void addCircle(Circle circle) {
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
@@ -33,7 +33,7 @@ public class CircleDaoImpl implements CircleDao{
 			dataSource.free(conn);
 		}
 	}
-	
+
 	public void delete(Circle circle) {
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
@@ -43,9 +43,9 @@ public class CircleDaoImpl implements CircleDao{
 			String sql = "delete from circle  where id=" + circle.getId();
 			st = conn.createStatement();
 			st.executeUpdate(sql);
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException(e.getMessage(), e);
-		}finally {
+		} finally {
 			dataSource.free(conn);
 		}
 	}
@@ -62,12 +62,12 @@ public class CircleDaoImpl implements CircleDao{
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				circle = mappingCircle(rs);
 			}
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException(e.getMessage(), e);
-		}finally {
+		} finally {
 			dataSource.free(conn);
 		}
 		return circle;
@@ -79,8 +79,7 @@ public class CircleDaoImpl implements CircleDao{
 		circle.setCreatedAt(rs.getDate("created_at"));
 		circle.setUpdatedAt(rs.getDate("updated_at"));
 		circle.setName(rs.getString("name"));
-		circle.setDeleted(rs.getBoolean("deleted"));
-        return circle;
+		return circle;
 	}
 
 	public void update(Circle circle) {
@@ -92,17 +91,17 @@ public class CircleDaoImpl implements CircleDao{
 			conn = dataSource.getConnection();
 			String sql = "update circle  set name=? where id=?;";
 			ps = conn.prepareStatement(sql);
-			ps.setString (1, circle.getName());
-			ps.setInt (2, circle.getId());
+			ps.setString(1, circle.getName());
+			ps.setInt(2, circle.getId());
 			ps.executeUpdate();
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException(e.getMessage(), e);
-		}finally {
+		} finally {
 			dataSource.free(conn);
 		}
 	}
-	
-	public List<Circle> list(){
+
+	public List<Circle> list() {
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		List listCircle = new ArrayList<Circle>();
 		Connection conn = null;
@@ -114,17 +113,16 @@ public class CircleDaoImpl implements CircleDao{
 			String sql = "select * from circle";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				circle = mappingCircle(rs);
 				listCircle.add(circle);
 			}
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException(e.getMessage(), e);
-		}finally {
+		} finally {
 			dataSource.free(conn);
 		}
 		return listCircle;
 	}
 
-	
 }

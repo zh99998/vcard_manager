@@ -47,11 +47,9 @@ public class CircleServlet extends HttpServlet {
 
 		CircleDao circleDao = new CircleDaoImpl();
 		Circle circle = circleDao.getCircle(Integer.valueOf(request.getParameter("id")));
-
-		circle.setName(request.getParameter("name"));
        
 		circleDao.delete(circle);
-		response.sendRedirect("CircleServlet");
+		response.sendRedirect("");
 	}
 
 	/**
@@ -70,18 +68,26 @@ public class CircleServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		if (request.getParameter("_method") != null) {
+			if (request.getParameter("_method").equals("put")) {
+				doPut(request, response);
+				return;
+			}else if (request.getParameter("_method").equals("delete")) {
+				doDelete(request, response);
+				return;
+			}
+		}
 		CircleDao circleDao = new CircleDaoImpl();
 		List<Circle> circles = circleDao.list();
 		request.setAttribute("circles", circles);
 		
 		CircleCardDao circcardleDao = new CircleCardDaoImpl();
-		Map<Integer, Set<CircleCard>> circlecards = new HashMap<Integer, Set<CircleCard>>();
+		Map<Integer, Integer> circlecards = new HashMap<Integer, Integer>();
 		for(CircleCard circlecard:circcardleDao.list()){
 			if(circlecards.get(circlecard.getCircleId()) == null){
-				circlecards.put(circlecard.getCircleId(), new HashSet());
+				circlecards.put(circlecard.getCircleId(), 0);
 			}
-			circlecards.get(circlecard.getCircleId()).add(circlecard);
+			circlecards.put(circlecard.getCircleId(), circlecards.get(circlecard.getCircleId())+1);
 		}
 		request.setAttribute("num", circlecards);
 		
@@ -122,7 +128,7 @@ public class CircleServlet extends HttpServlet {
 		CircleDao circleDao = new CircleDaoImpl();
 		circleDao.addCircle(circle);
 
-		response.sendRedirect("CircleServlet");
+		response.sendRedirect("");
 
 	}
 
@@ -156,7 +162,7 @@ public class CircleServlet extends HttpServlet {
 		circle.setName(request.getParameter("name"));
        
 		circleDao.update(circle);
-		response.sendRedirect("CircleServlet");
+		response.sendRedirect("");
 	
 		//out.println(request.getParameter("name"));
 		//out.println(circle.getId());
