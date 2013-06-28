@@ -50,59 +50,7 @@ function toCards(id) {
 
 	<body>
 		<!-- header -->
-		<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container-fluid">
-					<button type="button" class="btn btn-navbar" data-toggle="collapse"
-						data-target=".nav-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="brand" href="#">名片管理系統</a>
-					<div class="nav-collapse collapse">
-						<p class="navbar-text pull-right">
-							Logged in as
-							<a href="#" class="navbar-link">Username</a>
-						</p>
-						<ul class="nav">
-							<li class="active">
-								<a href="#">首页</a>
-							</li>
-							<li>
-								<a href="#about" data-toggle="modal">关于</a>
-							</li>
-							<!-- <li><a href="#contact">Contact</a></li> -->
-						</ul>
-					</div>
-					<!--/.nav-collapse -->
-				</div>
-			</div>
-		</div>
-
-		<div id="about" class="modal hide fade" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">
-					×
-				</button>
-				<h3 id="myModalLabel">
-					关于名片管理系统
-				</h3>
-			</div>
-			<div class="modal-body">
-				<p>
-					喵喵喵喵
-				</p>
-			</div>
-			<div class="modal-footer">
-				<button class="btn btn-primary" data-dismiss="modal"
-					aria-hidden="true">
-					确定
-				</button>
-			</div>
-		</div>
+		<jsp:include page="public/head.jsp"></jsp:include>
 
 
 		<!-- body -->
@@ -311,8 +259,9 @@ body {
 					<div>
 						<br />
 						<table style="width: 100%">
+							<th><td>姓名</td><td>邮箱</td><td>电话</td><td>公司</td></th>
 							<c:forEach var="cardEntry" items="${cardInfoesMap}">
-
+								
 								<tr style="cursor:pointer" onclick="toCards(${cardEntry.key.id})">
 									<td>
 										<input type="checkbox" class="cardentrycheckbox" data-cardid="${cardEntry.key.id}" style="cursor:default"/>

@@ -116,7 +116,27 @@ public class CircleCardDaoImpl implements CircleCardDao {
 			ps.setInt(2, cardId);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			throw new DaoException("获取circlecard列表失败1", e);
+			throw new DaoException("把card增添到一个circle里失败", e);
+		} finally {
+			dataSource.free(conn);
+		}
+	}
+
+	public void deleteCard4Circle(int cardId, int circleId) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			CircleCard circlecard=new CircleCard();
+			String sql = "delete from circle_cards where circle=? and cards=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, circleId);
+			ps.setInt(2, cardId);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new DaoException("把card从一个circle删除失败", e);
 		} finally {
 			dataSource.free(conn);
 		}

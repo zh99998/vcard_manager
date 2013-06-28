@@ -24,10 +24,18 @@
 </script>
 		<script src="js/bootstrap-combobox.js">
 </script>
+<style>
+.row{border-bottom: 1px solid lightgray}
+</style>
 	</head>
 
 	<body>
-		${circles}
+		<!-- header -->
+		<jsp:include page="public/head.jsp"></jsp:include>
+
+
+		<!-- body -->
+		
 		<div class="container">
 			<div class="btn-group">
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
@@ -47,10 +55,12 @@
 						<li>
 							<c:choose>
 								<c:when test="${circle.value}">
-									<input class="circlecheckbox" data-circleId="${circle.key.id}" type="checkbox" style="margin: 3px 10px;" checked />
+									<input class="circlecheckbox" data-circleId="${circle.key.id}"
+										type="checkbox" style="margin: 3px 10px;" checked />
 								</c:when>
 								<c:otherwise>
-									<input class="circlecheckbox" data-circleId="${circle.key.id}" type="checkbox" style="margin: 3px 10px;"/>
+									<input class="circlecheckbox" data-circleId="${circle.key.id}"
+										type="checkbox" style="margin: 3px 10px;" />
 								</c:otherwise>
 							</c:choose>
 							${circle.key.name}
@@ -117,7 +127,7 @@ $('.dropdown-menu').click(function(e) {
 								<span>姓名</span>
 							</c:when>
 							<c:when test="${info.property=='EMAIL'}">
-								<span>电子邮箱</span>
+								<span>邮箱</span>
 							</c:when>
 							<c:when test="${info.property=='ORG'}">
 								<span>组织</span>
@@ -131,8 +141,33 @@ $('.dropdown-menu').click(function(e) {
 							<c:when test="${info.type=='HOME'}">
 								<span>家庭</span>
 							</c:when>
-							<c:otherwise>
+							<c:when test="$(info.property=='ORG')">
+								<span>公司</span>
+							</c:when>
+							<c:when test="$(info.property=='NOTE')">
+								<span>备注</span>
+							</c:when>
+							<c:when test="$(info.property=='ADR')">
+								<span>地址</span>
+							</c:when>
+							<c:when test="$(info.property=='TITLE')">
+								<span>职位</span>
+							</c:when>
+							<c:when test="$(info.property=='URL')">
+								<span>网址</span>
+							</c:when>
+							<c:when test="$(info.property=='X-MSN')">
+								<span>MSN</span>
+							</c:when>
+							<c:when test="$(info.property=='X-TWITTER')">
+								<span>TWITTER</span>
+							</c:when>
+							<c:when test="${info.type!=null}">
 								<span>${info.type}</span>
+							</c:when>
+							<c:otherwise>
+
+								<span>${info.property}</span>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -184,35 +219,125 @@ $('.dropdown-menu').click(function(e) {
 					<option value="ORG">
 						公司
 					</option>
+					<option value="NOTE">
+						备注
+					</option>
+					<option value="ADR">
+						地址
+					</option>
+					<option value="NOTE">
+						备注
+					</option>
+					<option value="TITLE">
+						职位
+					</option>
+					<option value="URL">
+						网址
+					</option>
+					<option value="X-MSN">
+						MSN
+					</option>
+					<option value="X-TWITTER">
+						TWITTER
+					</option>
+					<option value="X-CUSTOM">
+						自定义
+					</option>
 				</select>
 			</div>
 			<script>
-$('.combobox')
-		.change(
-				function(ev) {
-					$('<div />', {
-						'class' : 'row'
-					}).append( [ $('<div />', {
-						'class' : 'span3'
-					}).append($('<span/>', {
-						'text' : this.value
-					})), $('<div />', {
-						'class' : 'span7'
-					}).append($('<div/>', {
-						'id' : 'create_' + this.value,
-						'class' : 'edit',
-						'text' : '点击编辑'
-					})), $('<div />', {
-						'class' : 'span2'
-					}),
+$('.combobox').change(function(ev) {
+	if (this.value == 'X-CUSTOM') {
+		var property = prompt('请输入字段名');
+		$('<div />', {
+			'class' : 'row'
+		}).append( [ $('<div />', {
+			'class' : 'span3'
+		}).append($('<span/>', {
+			'text' : property
+		})), $('<div />', {
+			'class' : 'span7'
+		}).append($('<input/>', {
+			'id' : 'create_' + property,
+			'type' : 'text'
+		})), $('<div />', {
+			'class' : 'span2'
+		}),
 
-					]).appendTo('#infoes')
-					$('.edit')
-							.editable(
-									'${pageContext.request.contextPath }/servlet/InfoServlet?card_id=${card.id}',
-									{});
-					this.value = 'ADD';
-				})
+		]).appendTo('#infoes')
+		$('#create_' + property).change(function() {
+			$.post('InfoServlet?card_id=${card.id}', {
+				id : this.id,
+				value : this.value
+			}, function() {
+				location.reload();
+			})
+		})
+
+		this.value = 'ADD';
+
+	} else {
+		switch (this.value) {
+		case 'FN':
+			var text = '姓名';
+			break;
+		case 'TEL':
+			var text = '电话';
+			break;
+		case 'EMAIL':
+			var text = '邮箱';
+			break;
+		case 'ORG':
+			var text = '公司';
+			break;
+		case 'ADR':
+			var text = '地址';
+			break;
+		case 'NOTE':
+			var text = '备注';
+			break
+		case 'TITLE':
+			var text = '职位';
+			break;
+		case 'URL':
+			var text = '网址';
+			break;
+		case 'X-MSN':
+			var text = 'MSN';
+			break;
+		case 'X-TWITTER':
+			var text = 'TWITTER';
+			break;
+		}
+		;
+		$('<div />', {
+			'class' : 'row'
+		}).append( [ $('<div />', {
+			'class' : 'span3'
+		}).append($('<span/>', {
+			'text' : text
+		})), $('<div />', {
+			'class' : 'span7'
+		}).append($('<input/>', {
+			'id' : 'create_' + this.value,
+			'type' : this.value == 'EMAIL' ? 'email' : 'text'
+		})), $('<div />', {
+			'class' : 'span2'
+		}),
+
+		]).appendTo('#infoes')
+		$('#create_' + this.value).change(function() {
+			$.post('InfoServlet?card_id=${card.id}', {
+				id : this.id,
+				value : this.value
+			}, function() {
+				location.reload();
+			})
+		})
+
+		this.value = 'ADD';
+	}
+})
 </script>
 			<%--<div class="span8">
 				<input type="text" class="edit" id="create_${info.id}" style="height:30px;" />
@@ -261,8 +386,8 @@ $('.combobox')
 		<script>
 $(document).ready(function() {
 	//$('.edit').editable();
-		$('.edit').editable(
-				'${pageContext.request.contextPath }/servlet/InfoServlet', {});
+		$('.edit').editable('${pageContext.request.contextPath }/InfoServlet',
+				{});
 	});
 </script>
 
@@ -361,10 +486,10 @@ $('#imgBackUpload').attr("disabled",true);
  })
  
  </script>
- <script>
- 
- $('.circlecheckbox').change(function(e){
-	 $.post('/CardCircleServlet', {checked: e.target.checked, circle_id: $(e.target).attr('data-circleId'), card_id: ${card.id}})
+		<script>
+
+$('.circlecheckbox').change(function(e){
+	 $.post('CardCircleServlet', {checked: e.target.checked, circle_id: $(e.target).attr('data-circleId'), card_id: ${card.id}})
  })
  </script>
 	</body>

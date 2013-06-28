@@ -14,5 +14,5 @@ public interface CircleCardDao {
 	//把一个card放到一个circle里
 	void addCard2Circle(int cardId,int circleId);
 	//把一个card从一个circle删除
-	
+	void deleteCard4Circle(int cardId,int circleId);
 }
