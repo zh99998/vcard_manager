@@ -7,6 +7,6 @@
   </head>
   
   <body>
-    <jsp:forward page="/servlet/FormServlet"></jsp:forward>
+    <jsp:forward page="/servlet/CardInfoesServlet"></jsp:forward>
   </body>
 </html>

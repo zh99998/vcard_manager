@@ -21,6 +21,7 @@ public class InfoDaoImpl implements InfoDao{
 		info.setProperty(rs.getString("property"));
 		info.setType(rs.getString("type"));
 		info.setValue(rs.getString("value"));
+		info.setCardId(rs.getInt("card"));
 		//info.setCard(rs.getBlob("img_front")); //需要用到card时在此添加
 		return info;
 		
@@ -81,7 +82,7 @@ public class InfoDaoImpl implements InfoDao{
 		ResultSet rs = null;
 		try {
 			conn = dataSource.getConnection();
-			String sql = "delete info where id=?;";
+			String sql = "delete from info where id=?;";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			ps.executeUpdate();
@@ -114,23 +115,43 @@ public class InfoDaoImpl implements InfoDao{
 		return info;
 	}
 
-	public void update(Info info) {
+	public void update(int id,String value) {
 		MyDataSource dataSource = MyDataSource.getMyDataSource();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			conn = dataSource.getConnection();
-			String sql = "update info  set property=?,type=?,value=? where id=?;";
+			String sql = "update info  set value=? where id=?;";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, info.getProperty());
-			ps.setString(2, info.getType());
-			ps.setString(3, info.getValue());
-			ps.setInt(4, info.getId());
+			ps.setString(1, value);
+			ps.setInt(2, id);
 			ps.executeUpdate();
 		} catch (SQLException e){
 			throw new DaoException("更新info信息失败", e);
 		}finally {
+			dataSource.free(conn);
+		}
+	}
+
+	public void addInfo(String property, String value, int cardId) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "insert into info(property,value,card) values(?,?,?);";
+			ps = conn.prepareStatement(sql);
+			System.out.println("--------------");
+			System.out.println(ps.toString());
+			ps.setString(1, property);
+			ps.setString(2, value);
+			ps.setInt(3, cardId);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new DaoException("添加info信息失败", e);
+		} finally {
 			dataSource.free(conn);
 		}
 	}

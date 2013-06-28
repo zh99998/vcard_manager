@@ -29,8 +29,8 @@ public class CardDaoImpl implements CardDao{
 			ps.setDate(2, new java.sql.Date(System.currentTimeMillis()));
 			ps.setBoolean(3, card.isDeleted());
 			ps.setBoolean(4, card.isMe());
-			ps.setBlob(5, card.getImgBack());
-			ps.setBlob(6, card.getImgFront());
+			ps.setString(5, card.getImgBack());
+			ps.setString(6, card.getImgFront());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new DaoException("添加card信息失败", e);
@@ -63,6 +63,7 @@ public class CardDaoImpl implements CardDao{
 		ResultSet rs = null;
 		Card card = new Card();
 		try {
+			conn = dataSource.getConnection();
 			String sql = "select * from card  where id=?;";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
@@ -75,6 +76,7 @@ public class CardDaoImpl implements CardDao{
 		}finally {
 			dataSource.free(conn);
 		}
+		System.out.println(card.toString());
 		return card;
 	}
 
@@ -85,8 +87,8 @@ public class CardDaoImpl implements CardDao{
 		card.setUpdatedAt(rs.getDate("updated_at"));
 		card.setMe(rs.getBoolean("is_me"));
 		card.setDeleted(rs.getBoolean("deleted"));
-		card.setImgBack(rs.getBlob("img_back"));
-		card.setImgFront(rs.getBlob("img_front"));
+		card.setImgBack(rs.getString("img_back"));
+		card.setImgFront(rs.getString("img_front"));
 		return card;
 		
 	}
@@ -101,8 +103,8 @@ public class CardDaoImpl implements CardDao{
 			String sql = "update card  set deleted=?,img_back=?,img_front=?,is_me=? where id=?;";
 			ps = conn.prepareStatement(sql);
 			ps.setBoolean(1, card.isDeleted());
-			ps.setBlob(2, card.getImgBack());
-			ps.setBlob(3, card.getImgFront());
+			ps.setString(2, card.getImgBack());
+			ps.setString(3, card.getImgFront());
 			ps.setBoolean(4, card.isMe());
 			int lineModified = ps.executeUpdate();
 		} catch (SQLException e){
@@ -134,6 +136,83 @@ public class CardDaoImpl implements CardDao{
 			dataSource.free(conn);
 		}
 		return listCard;
+	}
+
+	//保存上传的背面图
+	public void saveImgBack(int id,String imgFront) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "update card  set img_back=? where id=?;";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, imgFront);
+			ps.setInt(2, id);
+			ps.executeUpdate();
+		} catch (SQLException e){
+			throw new DaoException("上传背面图失败", e);
+		}finally {
+			dataSource.free(conn);
+		}
+	}
+	//保存上传的正面图
+	public void saveImgFront(int id,String imgBack) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "update card  set img_front=? where id=?;";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, imgBack);
+			ps.setInt(2, id);
+			ps.executeUpdate();
+		} catch (SQLException e){
+			throw new DaoException("上传正面图失败", e);
+		}finally {
+			dataSource.free(conn);
+		}
+	}
+
+	//删除背面图
+	public void deleteImgBack(int id) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "update card set img_back=null where id=?;";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		} catch (SQLException e){
+			throw new DaoException("删除背面图失败", e);
+		}finally {
+			dataSource.free(conn);
+		}
+	}
+
+	//删除正面图
+	public void deleteImgFront(int id) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			String sql = "update card set img_front=null where id=?;";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		} catch (SQLException e){
+			throw new DaoException("删除正面图失败", e);
+		}finally {
+			dataSource.free(conn);
+		}
 	}
 	
 }

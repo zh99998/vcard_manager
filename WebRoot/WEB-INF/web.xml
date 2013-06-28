@@ -19,6 +19,10 @@
     <servlet-class>edu.sdkd.web.controller.FormServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>CircleServlet</servlet-name>
+    <servlet-class>edu.sdkd.web.controller.CircleServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>edu.sdkd.web.controller.LoginServlet</servlet-class>
   </servlet>
@@ -50,10 +54,37 @@
     <servlet-name>CaptchaServlet</servlet-name>
     <servlet-class>edu.sdkd.web.controller.CaptchaServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CardServlet</servlet-name>
+    <servlet-class>edu.sdkd.web.controller.CardServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CircleCardInfoesServlet</servlet-name>
+    <servlet-class>edu.sdkd.web.controller.CircleCardInfoesServlet</servlet-class>
+  </servlet>
 
 
 
 
+<!-- 配置过滤器 -->
+
+    <filter>
+
+       <description>处理中文乱码过滤器</description>
+
+       <filter-name>ProFilter</filter-name>
+
+       <filter-class>edu.sdkd.utils.ProFilter</filter-class>
+
+    </filter>
+
+    <filter-mapping>
+
+       <filter-name>ProFilter</filter-name>
+
+       <url-pattern>*</url-pattern><!-- 过滤所有请求，注：tomcat5请用/* -->
+
+    </filter-mapping>
 
 
 
@@ -67,6 +98,10 @@
   <servlet-mapping>
     <servlet-name>FormServlet</servlet-name>
     <url-pattern>/servlet/FormServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CircleServlet</servlet-name>
+    <url-pattern>/servlet/CircleServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
@@ -96,6 +131,16 @@
     <servlet-name>CaptchaServlet</servlet-name>
     <url-pattern>/CaptchaServlet</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CardServlet</servlet-name>
+    <url-pattern>/servlet/CardServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>CircleCardInfoesServlet</servlet-name>
+    <url-pattern>/circles</url-pattern>
+  </servlet-mapping>
+  
 	<welcome-file-list>
 		<welcome-file>first.jsp</welcome-file>
 	</welcome-file-list>

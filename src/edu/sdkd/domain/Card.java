@@ -15,9 +15,22 @@ public class Card {
 	private Date updatedAt;
 	private boolean deleted;
 	private boolean isMe;
-	private Blob imgBack;
-	private Blob imgFront;
+	private String imgBack;
+	private String imgFront;
 	
+	public String getImgBack() {
+		return imgBack;
+	}
+	public void setImgBack(String imgBack) {
+		this.imgBack = imgBack;
+	}
+	public String getImgFront() {
+		return imgFront;
+	}
+	public void setImgFront(String imgFront) {
+		this.imgFront = imgFront;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -48,18 +61,8 @@ public class Card {
 	public void setMe(boolean isMe) {
 		this.isMe = isMe;
 	}
-	public Blob getImgBack() {
-		return imgBack;
-	}
-	public void setImgBack(java.sql.Blob blob) {
-		this.imgBack = (Blob) blob;
-	}
-	public Blob getImgFront() {
-		return imgFront;
-	}
-	public void setImgFront(java.sql.Blob blob) {
-		this.imgFront = (Blob) blob;
-	}
+	
+	
 	public List<Info> getInfoes() {
 		InfoDao infoDao = new InfoDaoImpl();
 		List<Info> infoes = infoDao.getInfoesByCard(id);
