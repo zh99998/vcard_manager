@@ -8,7 +8,7 @@
 	   url: "CaptchaServlet",  
 	   formId: "loginform",  
 	   text: "Verify that you are a human,<br />drag <span>scissors</span> into the circle.",
-	   items: Array("pencil", "scissors", "clock", "heart", "note") 
+	   items: Array("铅笔", "剪刀", "时钟", "心形", "音符") 
 	  };	
 	
 	var options = $.extend(defaults, options); 
