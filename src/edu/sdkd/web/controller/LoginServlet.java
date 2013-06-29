@@ -33,7 +33,6 @@ public class LoginServlet extends HttpServlet {
 		//request.setCharacterEncoding("utf-8");
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
-		int uid = 0; // 表示用户ID
 
 		System.out.println(request.getParameter("captcha"));
 		System.out.println(request.getSession().getAttribute("captcha"));
@@ -42,10 +41,15 @@ public class LoginServlet extends HttpServlet {
 			UserService userService = new UserServiceImpl();
 			User user = userService.login(name, password);
 			if (user != null) {
-				uid = user.getId();
+				int uid = user.getId();
 				request.getSession().setAttribute("uid", uid);// 保存登录用户ID
+				request.getSession().setAttribute("user", user);// 保存登录用户ID
+				System.out.println("-----");
+				System.out.println(uid);
 				// out.print("登录成功");
 				response.sendRedirect("");
+				//
+				//request.getRequestDispatcher("/servlet/CardInfoesServlet").forward(request, response);
 			} else {
 				// fail
 				request.setAttribute("failed", "用户名或密码错误");

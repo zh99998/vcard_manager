@@ -5,12 +5,12 @@ public class CardInfoBean {
 	private String TEL;
 	private String EMAIL;
 	private String ORG;
-	
+
 	public String getFN() {
 		return FN;
 	}
-	public void setFN(String fN) {
-		FN = fN;
+	public void setFN(String n) {
+		FN = n;
 	}
 	public String getTEL() {
 		return TEL;

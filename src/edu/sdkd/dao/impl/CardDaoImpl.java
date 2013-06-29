@@ -275,6 +275,58 @@ public class CardDaoImpl implements CardDao {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, key);
 			System.out.println(ps);
+			System.out.println(ps);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				card = mappingCard(rs);
+				listCard.add(card);
+			}
+		} catch (SQLException e) {
+			throw new DaoException("获取card列表失败", e);
+		} finally {
+			dataSource.free(conn);
+		}
+		return listCard;
+	}
+
+	public void merge(String ids) {
+		String[] idsarray = ids.split(",");
+		String main = idsarray[0];
+		
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		List listCard = new ArrayList<Card>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			Card card;
+			String sql = "update info set card="+main+" where card in("+ids+")";
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			sql = "delete from card where id in("+ids+") and id!="+main ;
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new DaoException("获取card列表失败", e);
+		} finally {
+			dataSource.free(conn);
+		}
+	}
+
+	public List<Card> list(String ids) {
+		MyDataSource dataSource = MyDataSource.getMyDataSource();
+		List listCard = new ArrayList<Card>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = dataSource.getConnection();
+			Card card;
+			String sql = "select * from card where id in("+ids+");";
+			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				card = mappingCard(rs);

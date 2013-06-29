@@ -26,5 +26,8 @@ public interface CardDao {
 	
 	//
 	public List<Card> search(String key);
-	
+	//合并
+	void merge(String ids);
+	//
+	List<Card> list(String ids);
 }

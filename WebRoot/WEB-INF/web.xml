@@ -74,6 +74,35 @@
     <servlet-name>CardCircleServlet</servlet-name>
     <servlet-class>edu.sdkd.web.controller.CardCircleServlet</servlet-class>
   </servlet>
+ <servlet>
+    <servlet-name>ChangeInfoServlet</servlet-name>
+    <servlet-class>edu.sdkd.web.controller.ChangeInfoServlet</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>UserManagerServlet</servlet-name>
+     <servlet-class>edu.sdkd.web.controller.UserManagerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UserDeleteServlet</servlet-name>
+     <servlet-class>edu.sdkd.web.controller.UserDeleteServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UpdateUserServlet</servlet-name>
+     <servlet-class>edu.sdkd.web.controller.UpdateUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddUserServlet</servlet-name>
+     <servlet-class>edu.sdkd.web.controller.AddUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ExportServlet</servlet-name>
+     <servlet-class>edu.sdkd.web.controller.ExportServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MergeServlet</servlet-name>
+    <servlet-class>edu.sdkd.web.controller.MergeServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -125,7 +154,7 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ORGViewServlet</servlet-name>
-    <url-pattern>/servlet/ORGViewServlet</url-pattern>
+    <url-pattern>/orgview</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>CardInfoesServlet</servlet-name>
@@ -159,6 +188,34 @@
   <servlet-mapping>
     <servlet-name>CardCircleServlet</servlet-name>
     <url-pattern>/CardCircleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ChangeInfoServlet</servlet-name>
+    <url-pattern>/ChangeInfoServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>UserManagerServlet</servlet-name>
+    <url-pattern>/UserManagerServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>UserDeleteServlet</servlet-name>
+     <url-pattern>/UserDeleteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdateUserServlet</servlet-name>
+     <url-pattern>/UpdateUserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddUserServlet</servlet-name>
+     <url-pattern>/AddUserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ExportServlet</servlet-name>
+     <url-pattern>/export</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MergeServlet</servlet-name>
+    <url-pattern>/merge</url-pattern>
   </servlet-mapping>
   
 	<welcome-file-list>

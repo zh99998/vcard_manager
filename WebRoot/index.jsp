@@ -83,7 +83,8 @@ body {
 							</li>
 							<c:forEach var="list" items="${circles}">
 								<li>
-									<a class="circle_${list.id}" href="circles?id=${list.id}" data-toggle="modal"
+									<a class="circle_${list.id}" href="circles?id=${list.id}"
+										data-toggle="modal"
 										onclick="$('#edit_circle_id_input').val(${list.id})">${list.name}
 										<c:forEach var="length" items="${num}">
 											<c:if test="${length.key == list.id}">
@@ -96,10 +97,6 @@ body {
 							<li>
 								<a href="#new_circle" role="button" class="btn"
 									data-toggle="modal" style="width: 80px">新建群组</a>
-							</li>
-							<li>
-								<a href="#myModal" role="button" class="btn" data-toggle="modal"
-									style="width: 80px">导入名片</a>
 							</li>
 							<!-- Modal -->
 							<div id="new_circle" class="modal hide fade" tabindex="-1"
@@ -146,10 +143,12 @@ body {
 								style="margin: 3px 10px;" /> <span class="caret"></span> </a>
 						<ul class="dropdown-menu">
 							<li>
-								<a tabindex="-1" href="#">全选</a>
+								<a tabindex="-1" href="#"
+									onclick="$('.cardentrycheckbox, #selectall').attr('checked', true);return false">全选</a>
 							</li>
 							<li>
-								<a tabindex="-1" href="#">全不选</a>
+								<a tabindex="-1" href="#"
+									onclick="$('.cardentrycheckbox, #selectall').attr('checked', false);return false">全不选</a>
 							</li>
 							<li class="divider"></li>
 						</ul>
@@ -166,27 +165,28 @@ body {
 						<div id="new_card" class="modal hide fade" tabindex="-1"
 							role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							<form action="CardServlet" method="POST">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-hidden="true">
-									×
-								</button>
-								<h3 id="myModalLabel">
-									请输入姓名
-								</h3>
-							</div>
-							<div class="modal-body">
-								<input name="FN" type="text" style="width: 525px; height: 55px;" />
-								<input name="action" value="addcard" type="hidden" />
-							</div>
-							<div class="modal-footer">
-								<button class="btn" data-dismiss="modal" aria-hidden="true">
-									关闭
-								</button>
-								<button class="btn btn-primary">
-									保存
-								</button>
-							</div>
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">
+										×
+									</button>
+									<h3 id="myModalLabel">
+										请输入姓名
+									</h3>
+								</div>
+								<div class="modal-body">
+									<input name="N" type="text"
+										style="width: 525px; height: 55px;" />
+									<input name="action" value="addcard" type="hidden" />
+								</div>
+								<div class="modal-footer">
+									<button class="btn" data-dismiss="modal" aria-hidden="true">
+										关闭
+									</button>
+									<button class="btn btn-primary">
+										保存
+									</button>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -196,13 +196,14 @@ body {
 							style="width: 65px;"> <span style="margin: 3px 10px;">更多</span>
 							<span class="caret"></span> </a>
 						<ul class="dropdown-menu">
-						<c:if test="${circleId!=null}">
-							<li>
-								<a tabindex="-1" href="CircleServlet?id=${circleId}&_method=delete">删除组</a>
-							</li>
-							
-						</c:if>
-							
+							<c:if test="${circleId!=null}">
+								<li>
+									<a tabindex="-1"
+										href="CircleServlet?id=${circleId}&_method=delete">删除组</a>
+								</li>
+
+							</c:if>
+
 							<li>
 								<a id="deleteCard" tabindex="-1" href="#">删除联系人</a>
 							</li>
@@ -210,24 +211,14 @@ body {
 								<a tabindex="-1" href="#">合并联系人</a>
 							</li>
 							<li class="divider"></li>
-							<li>
+							<!--<li>
 								<a tabindex="-1" href="#">导入...</a>
+							</li>-->
+							<li>
+								<a id="export" tabindex="-1" href="export">导出...</a>
 							</li>
 							<li>
-								<a tabindex="-1" href="#">导出...</a>
-							</li>
-							<li>
-								<a tabindex="-1" href="departview.jsp">公司部门视图</a>
-							</li>
-							<li>
-								<a tabindex="-1" href="#">还原通讯录</a>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<a tabindex="-1" href="#">名字</a>
-							</li>
-							<li>
-								<a tabindex="-1" href="#">姓氏</a>
+								<a tabindex="-1" href="orgview">公司部门视图</a>
 							</li>
 						</ul>
 					</div>
@@ -247,24 +238,42 @@ body {
 							<b>test</b>
 						</div>
 					</div>
-					
+
 					<div class="btn-group" style="float: right;">
 						<li>
-						<form action="search" id="searchForm">
-							<input name="key"/><a href="#" onclick="$('#searchForm').submit(); return false"><i class="icon-search"></a></i>
-						</form> 
+							<form action="search" id="searchForm" method="post">
+								<input name="key" />
+								<a href="#" onclick="$('#searchForm').submit(); return false">
+								<i class="icon-search"></i>
+								</a>
+							</form>
 						</li>
 					</div>
 
 					<div>
 						<br />
 						<table style="width: 100%">
-							<th><td>姓名</td><td>邮箱</td><td>电话</td><td>公司</td></th>
+							<th>
+								<td>
+									姓名
+								</td>
+								<td>
+									邮箱
+								</td>
+								<td>
+									电话
+								</td>
+								<td>
+									公司
+								</td>
+							</th>
 							<c:forEach var="cardEntry" items="${cardInfoesMap}">
-								
-								<tr style="cursor:pointer" onclick="toCards(${cardEntry.key.id})">
+
+								<tr style="cursor: pointer"
+									onclick="toCards(${cardEntry.key.id})">
 									<td>
-										<input type="checkbox" class="cardentrycheckbox" data-cardid="${cardEntry.key.id}" style="cursor:default"/>
+										<input type="checkbox" class="cardentrycheckbox"
+											data-cardid="${cardEntry.key.id}" style="cursor: default" />
 									</td>
 									<td>
 										${cardEntry.value.FN}
@@ -298,8 +307,7 @@ body {
 				</h3>
 			</div>
 
-			<form id="editCircleform" action="CircleServlet"
-				method="POST">
+			<form id="editCircleform" action="CircleServlet" method="POST">
 				<div class="modal-body">
 
 					<p>
@@ -327,21 +335,53 @@ $('.cardentrycheckbox').click(function(event) {
 	event.stopPropagation()
 })
 
-
-$('#deleteCard').click(function(){
+$('#deleteCard').click(function() {
 	var checkboxes = $('.cardentrycheckbox')
 	var result = new Array();
-	for(i=0; i<checkboxes.length;i++){
-		if(checkboxes[i].checked){
+	for (i = 0; i < checkboxes.length; i++) {
+		if (checkboxes[i].checked) {
 			result.push($(checkboxes[i]).attr('data-cardid'))
 		}
 	}
-	location.href="CardServlet?delete=delete&id=" + result.join(',')
-	
+	location.href = "CardServlet?delete=delete&id=" + result.join(',')
+return false;
+})
+
+$('#export').click(function() {
+	var checkboxes = $('.cardentrycheckbox')
+	var result = new Array();
+	for (i = 0; i < checkboxes.length; i++) {
+		if (checkboxes[i].checked) {
+			result.push($(checkboxes[i]).attr('data-cardid'))
+		}
+	}
+	location.href = "export?id=" + result.join(',')
+	return false;
+})
+
+$('#merge').click(function() {
+	var checkboxes = $('.cardentrycheckbox')
+	var result = new Array();
+	for (i = 0; i < checkboxes.length; i++) {
+		if (checkboxes[i].checked) {
+			result.push($(checkboxes[i]).attr('data-cardid'))
+		}
+	}
+	location.href = "merge?id=" + result.join(',')
+	                      return false;
 })
 </script>
-<style>
-.circle_${circleId} {background: lightblue;}
+		<style>
+.circle_ ${circleId
+	
+}
+{
+background
+:
+ 
+lightblue
+;
+}
 </style>
 	</body>
 </html>

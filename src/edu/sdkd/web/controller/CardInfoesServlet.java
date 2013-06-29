@@ -25,6 +25,12 @@ import edu.sdkd.service.impl.CardServiceImpl;
 public class CardInfoesServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getSession().getAttribute("uid")== null){
+			response.sendRedirect("login");
+			return;
+		}
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		

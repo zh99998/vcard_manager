@@ -44,6 +44,19 @@ public class SelectInfoServlet extends HttpServlet {
 		request.setAttribute("infoesList", infoesList);
 		System.out.println(4);
 		request.setAttribute("card", cardDao.getCard(cardId));
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("BEGIN:VCARD");
+		stringBuilder.append("VERSION:2.1");
+		for (Info info : cardDao.getCard(cardId).getInfoes()) {
+			String line = info.getProperty();
+			if (info.getType() != null)
+				line += ";" + info.getType();
+			line += ":" + info.getValue();
+			stringBuilder.append(line);
+		}
+		stringBuilder.append("END:VCARD");
+		request.setAttribute("vcard", stringBuilder.toString());
+		
 		System.out.println(5);
 		//CircleService circleService = new CircleServiceImpl();
 		//List<Circle> currentCircles = circleService.getCircle(cardId);

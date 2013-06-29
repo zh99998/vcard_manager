@@ -37,7 +37,7 @@ public class CardServiceImpl implements CardService {
 		for (Card card : cardList) {
 			CardInfoBean cardInfoBean = new CardInfoBean();
 			for (Info info : card.getInfoes()) {
-				if (info.getProperty().equals("FN")) {
+				if (info.getProperty().equals("N")) {
 					cardInfoBean.setFN(info.getValue());
 				}
 				if (info.getProperty().equals("TEL")) {
@@ -63,7 +63,7 @@ public class CardServiceImpl implements CardService {
 		for (Card card : cardList) {
 			CardInfoBean cardInfoBean = new CardInfoBean();
 			for (Info info : card.getInfoes()) {
-				if (info.getProperty().equals("FN")) {
+				if (info.getProperty().equals("N")) {
 					cardInfoBean.setFN(info.getValue());
 				}
 				if (info.getProperty().equals("TEL")) {
@@ -111,7 +111,7 @@ public class CardServiceImpl implements CardService {
 		for (Card card : cardList) {
 			CardInfoBean cardInfoBean = new CardInfoBean();
 			for (Info info : card.getInfoes()) {
-				if (info.getProperty().equals("FN")) {
+				if (info.getProperty().equals("N")) {
 					cardInfoBean.setFN(info.getValue());
 				}
 				if (info.getProperty().equals("TEL")) {

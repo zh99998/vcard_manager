@@ -22,6 +22,9 @@
 </script>
 		<script src="js/jquery.editable.min.js">
 </script>
+<script src="js/jquery.qrcode.min.js">
+</script>
+
 		<script src="js/bootstrap-combobox.js">
 </script>
 <style>
@@ -36,8 +39,8 @@
 
 		<!-- body -->
 		
-		<div class="container">
-			<div class="btn-group">
+		<div class="container-fluid" style="margin-top:50px">
+			<div class="btn-group" onclick="location.href='.'">
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
 					style="width: 65px; height: 20px;"> <i class="icon-hand-up"></i>
 				</a>
@@ -123,14 +126,11 @@ $('.dropdown-menu').click(function(e) {
 				<div id="info${info.id}" class="row">
 					<div class="span3">
 						<c:choose>
-							<c:when test="${info.property=='FN'}">
+							<c:when test="${info.property=='N'}">
 								<span>姓名</span>
 							</c:when>
 							<c:when test="${info.property=='EMAIL'}">
 								<span>邮箱</span>
-							</c:when>
-							<c:when test="${info.property=='ORG'}">
-								<span>组织</span>
 							</c:when>
 							<c:when test="${info.property=='TEL'}">
 								<span>电话</span>
@@ -141,25 +141,25 @@ $('.dropdown-menu').click(function(e) {
 							<c:when test="${info.type=='HOME'}">
 								<span>家庭</span>
 							</c:when>
-							<c:when test="$(info.property=='ORG')">
+							<c:when test="${info.property=='ORG'}">
 								<span>公司</span>
 							</c:when>
-							<c:when test="$(info.property=='NOTE')">
+							<c:when test="${info.property=='NOTE'}">
 								<span>备注</span>
 							</c:when>
-							<c:when test="$(info.property=='ADR')">
+							<c:when test="${info.property=='ADR'}">
 								<span>地址</span>
 							</c:when>
-							<c:when test="$(info.property=='TITLE')">
+							<c:when test="${info.property=='TITLE'}">
 								<span>职位</span>
 							</c:when>
-							<c:when test="$(info.property=='URL')">
+							<c:when test="${info.property=='URL'}">
 								<span>网址</span>
 							</c:when>
-							<c:when test="$(info.property=='X-MSN')">
+							<c:when test="${info.property=='X-MSN'}">
 								<span>MSN</span>
 							</c:when>
-							<c:when test="$(info.property=='X-TWITTER')">
+							<c:when test="${info.property=='X-TWITTER'}">
 								<span>TWITTER</span>
 							</c:when>
 							<c:when test="${info.type!=null}">
@@ -180,11 +180,21 @@ $('.dropdown-menu').click(function(e) {
 							</c:when>
 							<c:when test="${info.property == 'EMAIL'}">
 								<div style="width: 200px; height: 20px; float: left;"
-									class="edit" id="infodiv_${info.id}">
-									${info.value}
-								</div>
-								<a href="mailto:${info.value}" <i class="icon-envelope"></i></a>
+									class="edit" id="infodiv_${info.id}">${info.value}</div>
+								<a href="mailto:${info.value}"> <i class="icon-envelope"></i></a>
 							</c:when>
+							<c:when test="${info.property == 'URL'}">
+								<div style="width: 200px; height: 20px; float: left;"
+									class="edit" id="infodiv_${info.id}">${info.value}</div>
+								<a href="${info.value}"> <i class="icon-globe"></i></a>
+							</c:when>
+								<c:when test="${info.property == 'ADR'}">
+								<div style="width: 200px; height: 20px; float: left;"
+									class="edit" id="infodiv_${info.id}">${info.value}</div>
+								<a href="https://maps.google.com/maps?q=${info.value}" target="_blank" ><i class="icon-map-marker"></i></a>
+							</c:when>
+							
+							
 							<c:otherwise>
 								<div style="width: 200px; height: 20px; float: left;"
 									class="edit" id="infodiv_${info.id}">
@@ -207,7 +217,7 @@ $('.dropdown-menu').click(function(e) {
 					<option value="ADD">
 						添加
 					</option>
-					<option value="FN">
+					<option value="N">
 						姓名
 					</option>
 					<option value="EMAIL">
@@ -278,7 +288,7 @@ $('.combobox').change(function(ev) {
 
 	} else {
 		switch (this.value) {
-		case 'FN':
+		case 'N':
 			var text = '姓名';
 			break;
 		case 'TEL':
@@ -320,7 +330,7 @@ $('.combobox').change(function(ev) {
 			'class' : 'span7'
 		}).append($('<input/>', {
 			'id' : 'create_' + this.value,
-			'type' : this.value == 'EMAIL' ? 'email' : 'text'
+			'type' : this.value == 'EMAIL' && this.value == 'MSN' ? 'email' : this.value == 'TEL' ? 'number' : this.value == 'URL' ? 'url' : 'text'
 		})), $('<div />', {
 			'class' : 'span2'
 		}),
@@ -345,7 +355,23 @@ $('.combobox').change(function(ev) {
 		--%>
 		</div>
 		<hr />
-		${card.id}
+		<div style="margin-left:25px;" id="qrcode"></div> 
+		<script type="text/javascript">
+		
+		
+		
+		
+		$.get('export?id=${card.id}', function(data){
+			//$('#qrcode').qrcode(data)
+			//new QRCode(document.getElementById("qrcode"), data);
+			
+			$('<img />', {src: 'http://chart.apis.google.com/chart?chs=200x200&cht=qr&chl='+ encodeURIComponent(data) +'&choe=UTF-8&chld=Q|2'}).appendTo('#qrcode')
+			                                  
+			console.log(data)
+		})				 
+		</script>
+		<a data-toggle="modal" href="#share" >分享</a>
+		
 		<div>
 			<div class="span6">
 				<c:choose>
@@ -492,6 +518,39 @@ $('.circlecheckbox').change(function(e){
 	 $.post('CardCircleServlet', {checked: e.target.checked, circle_id: $(e.target).attr('data-circleId'), card_id: ${card.id}})
  })
  </script>
+ 
+ 
+ <div id="share" class="modal hide fade" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">
+										×
+									</button>
+									<h3 id="myModalLabel">
+										分享
+									</h3>
+								</div>
+								<form action="CircleServlet" method="POST">
+									<div class="modal-body">
+
+										<p>
+											请复制地址发送给你的好友
+											<input id="shareinput" type="text" name="name"/>
+										</p>
+									</div>
+									<div class="modal-footer">
+										<button class="btn" data-dismiss="modal" aria-hidden="true">
+											关闭
+										</button>
+									</div>
+								</form>
+							</div>
+							<script>
+							$('#shareinput').val(location.href)
+							$('#shareinput').select()
+							</script>
+ 
 	</body>
 
 </html>

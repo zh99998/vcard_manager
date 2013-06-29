@@ -20,6 +20,12 @@ import edu.sdkd.service.impl.CardServiceImpl;
 public class CardServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getSession().getAttribute("uid")== null){
+			response.sendRedirect("login");
+			return;
+		}
+		
 		if (request.getParameter("delete").equals("delete")) {
 			String deleted = request.getParameter("id");
 			CardDao cardDao = new CardDaoImpl();
@@ -40,12 +46,12 @@ public class CardServlet extends HttpServlet {
 		System.out.println(10);
 		if (request.getParameter("action") != null && request.getParameter("action").equals("addcard")) {
 			System.out.println(104);
-			String cardName = request.getParameter("FN");
+			String cardName = request.getParameter("N");
 			Card card = new Card();
 			Info info = new Info();
 			CardDao cardDao = new CardDaoImpl();
 			int id = cardDao.addCardAndGetId(card);
-			info.setProperty("FN");
+			info.setProperty("N");
 			info.setValue(cardName);
 			info.setCardId(id);
 			InfoDao infoDao = new InfoDaoImpl();

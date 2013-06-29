@@ -61,7 +61,7 @@ h2 em{color:#e4ebf8;}
 <body>
     <h1></h1>
     <p class="link">
-        <a href="/">&#9666;返回首页</a>
+        <a href=".">&#9666;返回首页</a>
         <a href="javascript:history.go(-1);">&#9666;返回上一页</a>
     </p>
     <dl class="texts">

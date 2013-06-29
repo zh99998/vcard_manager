@@ -28,15 +28,11 @@ public class SearchServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		
-		System.out.println("1");
 		
 		CardService cardService = new CardServiceImpl();
-		System.out.println("2");
 		Map<Card, CardInfoBean> cardInfoesMap = cardService.search(request.getParameter("key"));
 		
-		System.out.println("3");
 		request.setAttribute("cardInfoesMap", cardInfoesMap);
-		System.out.println("4");
 		
 		
 		CircleDao circleDao = new CircleDaoImpl();
@@ -53,14 +49,10 @@ public class SearchServlet extends HttpServlet {
 		}
 		request.setAttribute("num", circlecards);
 		
-		
-		
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
-		System.out.println("5");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		doGet(request, response);
 	}
 

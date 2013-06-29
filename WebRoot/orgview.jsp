@@ -31,47 +31,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <!--  (Map<String, Set<Card>>)request.getAttribute("orgview"). -->
 	<!-- header -->
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container-fluid">
-				<button type="button" class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="brand" href="#">名片管理系統</a>
-				<div class="nav-collapse collapse">
-					<p class="navbar-text pull-right">
-						Logged in as <a href="#" class="navbar-link">Username</a>
-					</p>
-					<ul class="nav">
-						<li class="active"><a href="#">首页</a></li>
-						<li><a href="#about" data-toggle="modal">关于</a></li>
-						<!-- <li><a href="#contact">Contact</a></li> -->
-					</ul>
-				</div>
-				<!--/.nav-collapse -->
-			</div>
-		</div>
-	</div>
-
-	<div id="about" class="modal hide fade" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true">×</button>
-			<h3 id="myModalLabel">关于名片管理系统</h3>
-		</div>
-		<div class="modal-body">
-			<p>喵喵喵喵</p>
-		</div>
-		<div class="modal-footer">
-			<button class="btn btn-primary" data-dismiss="modal"
-				aria-hidden="true">确定</button>
-		</div>
-	</div>
-
-
+	
+	<jsp:include page="public/head.jsp"></jsp:include>
 	<!-- body -->
 
 	<style type="text/css">
@@ -175,39 +136,64 @@ body {
 
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<div class="span3">
-				<div class="well sidebar-nav">
-					<ul class="nav nav-list">
-						<li class="active"><a href="#">通讯录</a></li>
-						<li><a href="#">群组1</a></li>
-						<li><a href="#">群组2</a></li>
-						<!-- Button to trigger modal -->
-						<li><a href="#new_circle" role="button" class="btn"
-							data-toggle="modal" style="width:80px">新建群组</a></li>
-						<li><a href="#myModal" role="button" class="btn"
-							data-toggle="modal" style="width:80px">导入名片</a></li>
-						<!-- Modal -->
-						<div id="new_circle" class="modal hide fade" tabindex="-1"
-							role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-hidden="true">×</button>
-								<h3 id="myModalLabel">Modal header</h3>
+		<div class="span3">
+					<div class="well sidebar-nav">
+						<ul class="nav nav-list">
+							<li class="active">
+								<a href="#">通讯录</a>
+							</li>
+							<c:forEach var="list" items="${circles}">
+								<li>
+									<a class="circle_${list.id}" href="circles?id=${list.id}"
+										data-toggle="modal"
+										onclick="$('#edit_circle_id_input').val(${list.id})">${list.name}
+										<c:forEach var="length" items="${num}">
+											<c:if test="${length.key == list.id}">
+								(${length.value})
+								</c:if>
+										</c:forEach> </a>
+								</li>
+							</c:forEach>
+							<!-- Button to trigger modal -->
+							<li>
+								<a href="#new_circle" role="button" class="btn"
+									data-toggle="modal" style="width: 80px">新建群组</a>
+							</li>
+							<!-- Modal -->
+							<div id="new_circle" class="modal hide fade" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">
+										×
+									</button>
+									<h3 id="myModalLabel">
+										输入新建群组名称
+									</h3>
+								</div>
+								<form action="CircleServlet" method="POST">
+									<div class="modal-body">
+
+										<p>
+											输入组名
+											<input type="text" name="name" />
+										</p>
+									</div>
+									<div class="modal-footer">
+										<button class="btn" data-dismiss="modal" aria-hidden="true">
+											关闭
+										</button>
+										<button class="btn btn-primary">
+											保存
+										</button>
+									</div>
+								</form>
 							</div>
-							<div class="modal-body">
-								<p>
-									输入组名 <input type="text" name="fname" />
-								</p>
-							</div>
-							<div class="modal-footer">
-								<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-								<button class="btn btn-primary">保存</button>
-							</div>
-						</div>
-					</ul>
+						</ul>
+					</div>
+
+					<!--/.well -->
 				</div>
-				<!--/.well -->
-			</div>
 			<!--/span-->
 
 
@@ -256,24 +242,37 @@ body {
 					</div>
 				</div>
 
-				<div class="btn-group">
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
-						style="width:65px;"> <span style="margin:3px 10px;">更多</span>
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a tabindex="-1" href="#">删除联系人</a></li>
-						<li><a tabindex="-1" href="#">合并联系人</a></li>
-						<li class="divider"></li>
-						<li><a tabindex="-1" href="#">导入...</a></li>
-						<li><a tabindex="-1" href="#">导出...</a></li>
-						<li><a tabindex="-1" href="#">查找并合并重复项</a></li>
-						<li><a tabindex="-1" href="departview.jsp">公司部门视图</a></li>
-						<li class="divider"></li>
-						<li><a tabindex="-1" href="#">名字</a></li>
-						<li><a tabindex="-1" href="#">姓氏</a></li>
-					</ul>
-				</div>
+					<div class="btn-group">
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
+							style="width: 65px;"> <span style="margin: 3px 10px;">更多</span>
+							<span class="caret"></span> </a>
+						<ul class="dropdown-menu">
+							<c:if test="${circleId!=null}">
+								<li>
+									<a tabindex="-1"
+										href="CircleServlet?id=${circleId}&_method=delete">删除组</a>
+								</li>
+
+							</c:if>
+
+							<li>
+								<a id="deleteCard" tabindex="-1" href="#">删除联系人</a>
+							</li>
+							<li>
+								<a tabindex="-1" href="#">合并联系人</a>
+							</li>
+							<li class="divider"></li>
+							<!--<li>
+								<a tabindex="-1" href="#">导入...</a>
+							</li>-->
+							<li>
+								<a id="export" tabindex="-1" href="export">导出...</a>
+							</li>
+							<li>
+								<a tabindex="-1" href="orgview">公司部门视图</a>
+							</li>
+						</ul>
+					</div>
 
 				<div class="btn-group" style="float:right;">
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
@@ -310,7 +309,7 @@ body {
                 \<\% var ps; %>\
                 \<\% if ( !_.isUndefined(ps = _.find(options.selected, function(elem) { return elem.key === this.key; }, parent)) ) { %>\
                 checked="checked"\
-                \<\% } %> value="\<\%= parent.key %>" /> \<\%= parent.key %><i class="icon-chevron-up icon-black"></i></span>\
+                \<\% } %> /> \<\%= parent.key %><i class="icon-chevron-up icon-black"></i></span>\
                 \<\% if (options.startCollapsed) { %>\
                 <ul style="display: none;">\
                 \<\% } else { %>\
@@ -318,10 +317,10 @@ body {
                 \<\% } %>\
                     \<\% _.each(parent.values, function(child, index) { %>\
                     <li>\
-                        <span><input type="checkbox" \
+                        <span><input class="cardentrycheckbox" type="checkbox" \
                         \<\% if ( !_.isUndefined(this) && !_.isUndefined(_.find(this.values, function(elem) { return elem.key === this.key; }, child)) ) { %>\
                         checked="checked"\
-                        \<\% } %> value="\<\%= child.key %>" /> \<\%= child.key %></span>\
+                        \<\% } %> value="\<\%= child.id %>" data-cardid="\<\%= child.id %>"/> <a href="cards?id=\<\%=child.id\%\>">\<\%= child.key %></a></span>\
                     </li>\
                     \<\% }, ps); %>\
                 </ul>\
@@ -625,39 +624,7 @@ body {
 	 * Formatted like d3.js's nest() function.
 	 */
 	 
-	var data = [ {
-	
-		"key" : "Parent 1",
-		"values" : [ {
-			"key" : "Parent 1 Child 1"
-		}, {
-			"key" : "Parent 1 Child 2"
-		}, {
-			"key" : "Parent 1 Child 3"
-		}, {
-			"key" : "Parent 1 Child 4"
-		}, {
-			"key" : "Parent 1 Child 5"
-		} ]
-	}, {
-		"key" : "Parent 2",
-		"values" : [ {
-			"key" : "Parent 2 Child", "values":[{"key":"nya" }]
-		}, {
-			"key" : "Parent 2 Child 2"
-		}, {
-			"key" : "Parent 2 Child 3"
-		} ]
-	}, {
-		"key" : "Parent 3",
-		"values" : [ {
-			"key" : "Parent 3 Child 1"
-		}, {
-			"key" : "Parent 3 Child 2"
-		}, {
-			"key" : "Parent 3 Child 3"
-		} ]
-	} ];
+	var data = ${orgviewjson};
 
 
 	$(document).on('click', '.btn-success', function(e) {
@@ -685,7 +652,43 @@ body {
 	});
 </script>
 
-			
+<script>
+$('#deleteCard').click(function() {
+	var checkboxes = $('.cardentrycheckbox')
+	var result = new Array();
+	for (i = 0; i < checkboxes.length; i++) {
+		if (checkboxes[i].checked) {
+			result.push($(checkboxes[i]).attr('data-cardid'))
+		}
+	}
+	location.href = "CardServlet?delete=delete&id=" + result.join(',')
+	return false;
+})
+
+$('#export').click(function() {
+	var checkboxes = $('.cardentrycheckbox')
+	var result = new Array();
+	for (i = 0; i < checkboxes.length; i++) {
+		if (checkboxes[i].checked) {
+			result.push($(checkboxes[i]).attr('data-cardid'))
+		}
+	}
+	location.href = "export?id=" + result.join(',')
+	return false;
+})
+
+$('#merge').click(function() {
+	var checkboxes = $('.cardentrycheckbox')
+	var result = new Array();
+	for (i = 0; i < checkboxes.length; i++) {
+		if (checkboxes[i].checked) {
+			result.push($(checkboxes[i]).attr('data-cardid'))
+		}
+	}
+	location.href = "merge?id=" + result.join(',')
+	return false;
+})
+</script>			
 			
 			</div>
 		</div>
