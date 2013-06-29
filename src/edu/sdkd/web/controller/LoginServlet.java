@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 
 		System.out.println(request.getParameter("captcha"));
 		System.out.println(request.getSession().getAttribute("captcha"));
-		if(Integer.valueOf(request.getParameter("captcha")) == request.getSession().getAttribute("captcha")){
+		if(request.getParameter("captcha") != null && Integer.valueOf(request.getParameter("captcha")) == request.getSession().getAttribute("captcha")){
 			
 			UserService userService = new UserServiceImpl();
 			User user = userService.login(name, password);

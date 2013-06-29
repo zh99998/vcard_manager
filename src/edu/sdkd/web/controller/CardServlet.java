@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.sdkd.dao.CardDao;
+import edu.sdkd.dao.CircleCardDao;
 import edu.sdkd.dao.InfoDao;
 import edu.sdkd.dao.impl.CardDaoImpl;
+import edu.sdkd.dao.impl.CircleCardDaoImpl;
 import edu.sdkd.dao.impl.InfoDaoImpl;
 import edu.sdkd.domain.Card;
 import edu.sdkd.domain.Info;
@@ -28,6 +30,10 @@ public class CardServlet extends HttpServlet {
 		
 		if (request.getParameter("delete").equals("delete")) {
 			String deleted = request.getParameter("id");
+			if(deleted == null || deleted.equals("")){
+				response.sendRedirect("");
+				return;
+			}
 			CardDao cardDao = new CardDaoImpl();
 			cardDao.deleteCard(deleted);
 		}
@@ -56,7 +62,14 @@ public class CardServlet extends HttpServlet {
 			info.setCardId(id);
 			InfoDao infoDao = new InfoDaoImpl();
 			infoDao.addInfo(info);
-			response.sendRedirect("");
+			
+			String circleId = request.getParameter("circleId");
+			if(circleId !=null && !circleId.equals("")){
+				CircleCardDao circleCardDao = new CircleCardDaoImpl();
+				circleCardDao.addCard2Circle(id, Integer.valueOf(circleId));
+			}
+ 			
+			response.sendRedirect("cards?id="+id);
 			
 		} else {
 			System.out.println(105);

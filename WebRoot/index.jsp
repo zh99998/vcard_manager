@@ -178,6 +178,7 @@ body {
 									<input name="N" type="text"
 										style="width: 525px; height: 55px;" />
 									<input name="action" value="addcard" type="hidden" />
+									<input name="circleId" value="${circleId}" type="hidden" />
 								</div>
 								<div class="modal-footer">
 									<button class="btn" data-dismiss="modal" aria-hidden="true">
@@ -202,13 +203,18 @@ body {
 										href="CircleServlet?id=${circleId}&_method=delete">删除组</a>
 								</li>
 
+								<li>
+									<a tabindex="-1"
+										href="#edit_circle" data-toggle="modal">修改组名称</a>
+								</li>
+
 							</c:if>
 
 							<li>
 								<a id="deleteCard" tabindex="-1" href="#">删除联系人</a>
 							</li>
 							<li>
-								<a tabindex="-1" href="#">合并联系人</a>
+								<a id="merge" tabindex="-1" href="#">合并联系人</a>
 							</li>
 							<li class="divider"></li>
 							<!--<li>
@@ -313,9 +319,8 @@ body {
 					<p>
 						输入修改群组名
 						<input type="text" name="name" />
-						<input id="edit_circle_id_input" type="hidden" name="id" />
+						<input type="hidden" name="id" value=${circleId} />
 						<input type="hidden" name="_method" value="put" />
-						<input type="submit" value="删除" onclick="_method.value='delete'" />
 					</p>
 				</div>
 
@@ -372,9 +377,7 @@ $('#merge').click(function() {
 })
 </script>
 		<style>
-.circle_ ${circleId
-	
-}
+.circle_${circleId}
 {
 background
 :

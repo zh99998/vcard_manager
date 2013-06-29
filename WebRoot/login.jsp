@@ -101,7 +101,7 @@
 		$(function() {
 			$(".ajax-fc-container").captcha({
 				borderColor: "silver",
-				text: "为了证明你是人类,<br />请把 <span>heart</span> 拖拽到圆圈内."
+				text: "验证码：<br />请把 <span>heart</span> 拖拽到圆圈内."
 			});
 		});
 	</script>

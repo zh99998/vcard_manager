@@ -15,6 +15,7 @@
 				<p class="navbar-text pull-right">
 					欢迎回来，
 					<a href="changeinfo.jsp" class="navbar-link">${user.name}</a>
+					| <a href="logout">退出</a>
 				</p>
 
 				<ul class="nav">
@@ -68,4 +69,5 @@
 			确定
 		</button>
 	</div>
+	
 </div>

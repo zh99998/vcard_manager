@@ -155,9 +155,12 @@ public class UserDaoImpl implements UserDao {
 			try {
 				
 				conn = dataSource.getConnection();
-				String sql = "UPDATE user SET name=userName ,password=userPassword WHERE id=?;";
+				String sql = "UPDATE user SET name=? ,password=? WHERE id=?;";
 				ps = conn.prepareStatement(sql);
-				ps.setInt(1, id);
+				
+				ps.setString(1, name);
+				ps.setString(2, password);
+				ps.setInt(3, id);
 				ps.executeUpdate();
 				
 			} catch (SQLException e) {

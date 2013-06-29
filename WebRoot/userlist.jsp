@@ -89,8 +89,15 @@ td {
 
 	}
 </script>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
 </head>
 <body>
+	<jsp:include page="public/head.jsp"></jsp:include>
+
+
 	<div id="main">
 		<form name="form1" action="UserManagerServlet"	method="post"/>
 			<table border="1" align="center" style="border-collapse:collapse;">

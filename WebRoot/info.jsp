@@ -42,7 +42,7 @@
 		<div class="container-fluid" style="margin-top:50px">
 			<div class="btn-group" onclick="location.href='.'">
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
-					style="width: 65px; height: 20px;"> <i class="icon-hand-up"></i>
+					style="width: 65px; height: 20px;"> <i class="icon-home"></i>
 				</a>
 			</div>
 
@@ -85,31 +85,10 @@ $('.dropdown-menu').click(function(e) {
 					<span class="caret"></span> </a>
 				<ul class="dropdown-menu">
 					<li>
-						<a tabindex="-1" href="#">删除联系人</a>
+						<a tabindex="-1" href="CardServlet?delete=delete&id=${card.id}">删除联系人</a>
 					</li>
 					<li>
-						<a tabindex="-1" href="#">合并联系人</a>
-					</li>
-					<li class="divider"></li>
-					<li>
-						<a tabindex="-1" href="#">导入...</a>
-					</li>
-					<li>
-						<a tabindex="-1" href="#">导出...</a>
-					</li>
-					<li>
-						<a tabindex="-1" href="#">查找并合并重复项</a>
-					</li>
-					<li>
-						<a tabindex="-1" href="#">还原通讯录</a>
-					</li>
-					</li>
-					<li class="divider"></li>
-					<li>
-						<a tabindex="-1" href="#">名字</a>
-					</li>
-					<li>
-						<a tabindex="-1" href="#">姓氏</a>
+						<a tabindex="-1" href="export?id=${card.id}">导出...</a>
 					</li>
 				</ul>
 			</div>

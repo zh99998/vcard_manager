@@ -34,7 +34,7 @@ public class AddUserServlet extends HttpServlet {
 		userDao.addUser(username,password);
 		}catch(DaoException e){
 			request.setAttribute("failed", "用户名重复！");
-			request.getRequestDispatcher("/servlet/UserManagerServlet").forward(request,
+			request.getRequestDispatcher("/UserManagerServlet").forward(request,
 					response);
 			return;
 		}

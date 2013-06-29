@@ -216,31 +216,7 @@ body {
 					</ul>
 				</div>
 
-				<div class="btn-group">
-					<a href="#new_card" class="btn dropdown-toggle" style="width:65px;"
-						data-toggle="modal"> <i class="icon-user"> <!-- --></i><i
-						class="icon-plus"> <!--  --></i><span style="margin:3px 10px;"></span>
-						<span class="caret"></span>
-					</a>
-
-					<!-- Modal -->
-					<div id="new_card" class="modal hide fade" tabindex="-1"
-						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">×</button>
-							<h3 id="myModalLabel">Modal header</h3>
-						</div>
-						<div class="modal-body">
-							<input type="text" style="width:525px;height:55px;" />
-						</div>
-						<div class="modal-footer">
-							<button class="btn" data-dismiss="modal" aria-hidden="true">
-								关闭</button>
-							<button class="btn btn-primary">保存</button>
-						</div>
-					</div>
-				</div>
+				
 
 					<div class="btn-group">
 						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
@@ -293,7 +269,6 @@ body {
 				</div>
     <button class="btn btn-info">全部展开</button>
     <button class="btn btn-warning">全部折叠</button>
-    <button class="btn btn-inverse">导出</button>
 
 			<div id="content">
     <div class="listTree"></div>

@@ -18,8 +18,14 @@ import net.sf.json.JSONObject;
 
 import edu.sdkd.bean.CardInfoBean;
 import edu.sdkd.dao.CardDao;
+import edu.sdkd.dao.CircleCardDao;
+import edu.sdkd.dao.CircleDao;
 import edu.sdkd.dao.impl.CardDaoImpl;
+import edu.sdkd.dao.impl.CircleCardDaoImpl;
+import edu.sdkd.dao.impl.CircleDaoImpl;
 import edu.sdkd.domain.Card;
+import edu.sdkd.domain.Circle;
+import edu.sdkd.domain.CircleCard;
 import edu.sdkd.domain.Info;
 import edu.sdkd.service.CardService;
 import edu.sdkd.service.impl.CardServiceImpl;
@@ -47,6 +53,20 @@ public class ORGViewServlet extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		}
+		
+		CircleDao circleDao = new CircleDaoImpl();
+		List<Circle> circles = circleDao.list();
+		request.setAttribute("circles", circles);
+		
+		CircleCardDao circcardleDao = new CircleCardDaoImpl();
+		Map<Integer, Integer> circlecards = new HashMap<Integer, Integer>();
+		for(CircleCard circlecard:circcardleDao.list()){
+			if(circlecards.get(circlecard.getCircleId()) == null){
+				circlecards.put(circlecard.getCircleId(), 0);
+			}
+			circlecards.put(circlecard.getCircleId(), circlecards.get(circlecard.getCircleId())+1);
+		}
+		request.setAttribute("num", circlecards);
 		
 		CardDao cardDao = new CardDaoImpl();
 		Map<String, Map<Card, CardInfoBean>> orgview = new HashMap<String, Map<Card, CardInfoBean>>();
